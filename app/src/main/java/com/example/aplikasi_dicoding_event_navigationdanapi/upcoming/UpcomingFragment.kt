@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentUpcomingBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.main.MainViewModel
 import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
 
 class UpcomingFragment : Fragment() {
