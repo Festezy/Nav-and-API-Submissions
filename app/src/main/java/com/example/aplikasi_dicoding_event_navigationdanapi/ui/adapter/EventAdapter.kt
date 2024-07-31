@@ -15,12 +15,13 @@ class EventAdapter: ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF_
     class MyViewHolder(private val binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(eventItem: ListEventsItem){
             binding.apply {
-                imgItemPhoto.load(eventItem.imageLogo) {
-                    crossfade(true)
-                    placeholder(R.drawable.ic_loading)
-
-                    transformations(RoundedCornersTransformation())
-                }
+                imgItemPhoto.load(eventItem.imageLogo)
+//                {
+//                    crossfade(true)
+//                    placeholder(R.drawable.ic_loading)
+//
+//                    transformations(RoundedCornersTransformation())
+//                }
                 tvItemName.text = eventItem.name
             }
         }
