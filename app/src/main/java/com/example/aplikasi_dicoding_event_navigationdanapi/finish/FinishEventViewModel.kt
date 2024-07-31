@@ -1,4 +1,4 @@
-package com.example.aplikasi_dicoding_event_navigationdanapi.main
+package com.example.aplikasi_dicoding_event_navigationdanapi.finish
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,7 +11,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel: ViewModel() {
+class FinishEventViewModel: ViewModel() {
+
 
     private val _listEventItem = MutableLiveData<List<ListEventsItem>>()
     val listEventItem: LiveData<List<ListEventsItem>> = _listEventItem
@@ -21,9 +22,9 @@ class MainViewModel: ViewModel() {
 
     private val client = ApiConfig.getApiService()
 
-    fun getEventList(active: String){
+    fun getFinishedEventList(active: String){
         _isLoading.value = true
-        client.getEvent(active).enqueue(object : Callback<EventResponse>{
+        client.getEvent(active).enqueue(object : Callback<EventResponse> {
             override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
                 if (response.isSuccessful){
                     _isLoading.value = false
@@ -44,6 +45,6 @@ class MainViewModel: ViewModel() {
     }
 
     companion object{
-        private const val TAG = "MainViewModel"
+        private const val TAG = "FinishEventViewModel"
     }
 }
