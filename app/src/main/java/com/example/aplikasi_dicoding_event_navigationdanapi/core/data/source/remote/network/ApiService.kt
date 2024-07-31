@@ -4,12 +4,13 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.rem
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("events/{active}")
+    @GET("events")
     fun getEvent(
-        @Path("active") active: Int
+        @Query("active") active: String
     ): Call<EventResponse>
 
 //    @GET("detail/{id}")

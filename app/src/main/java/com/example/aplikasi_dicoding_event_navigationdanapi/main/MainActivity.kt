@@ -6,6 +6,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityMainBinding
@@ -24,6 +26,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MainViewModel::class.java]
+        viewModel.getEventList("0")
+        viewModel.listEventItem.observe(this){
+            setReviewData(it)
+        }
 //        setReviewData()
     }
 
@@ -31,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         val adapter = EventAdapter()
         adapter.submitList(consumerReviews)
         binding.apply {
+            rvEvent.setHasFixedSize(true)
+            rvEvent.layoutManager = LinearLayoutManager(this@MainActivity)
             rvEvent.adapter = adapter
 //            rvEvent.setText("")
         }

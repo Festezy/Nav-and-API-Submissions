@@ -20,6 +20,7 @@ class EventAdapter: ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF_
                     placeholder(R.drawable.ic_loading)
                     transformations(RoundedCornersTransformation())
                 }
+                tvItemName.text = eventItem.name
             }
         }
     }
