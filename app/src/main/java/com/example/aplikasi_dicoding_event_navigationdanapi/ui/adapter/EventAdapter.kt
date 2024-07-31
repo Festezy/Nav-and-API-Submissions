@@ -18,6 +18,7 @@ class EventAdapter: ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF_
                 imgItemPhoto.load(eventItem.imageLogo) {
                     crossfade(true)
                     placeholder(R.drawable.ic_loading)
+
                     transformations(RoundedCornersTransformation())
                 }
                 tvItemName.text = eventItem.name
