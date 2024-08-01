@@ -1,5 +1,6 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +12,7 @@ import coil.size.Size
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ItemEventBinding
+import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
 
 class EventAdapter : ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(private val binding: ItemEventBinding) :
@@ -24,6 +26,13 @@ class EventAdapter : ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF
                     Scale.FILL
                 }
                 tvItemName.text = eventItem.name
+
+                root.setOnClickListener {
+                    Intent(root.context, DetailsActivity::class.java).also { intent ->
+                        intent.putExtra(DetailsActivity.EXTRA_ID, eventItem.id.toString())
+                        it.context.startActivity(intent)
+                    }
+                }
             }
         }
     }
