@@ -6,22 +6,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.RoundedCornersTransformation
+import coil.size.Scale
+import coil.size.Size
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ItemEventBinding
 
-class EventAdapter: ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
-    class MyViewHolder(private val binding: ItemEventBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(eventItem: ListEventsItem){
+class EventAdapter : ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    class MyViewHolder(private val binding: ItemEventBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(eventItem: ListEventsItem) {
             binding.apply {
-                imgItemPhoto.load(eventItem.imageLogo)
-//                {
-//                    crossfade(true)
-//                    placeholder(R.drawable.ic_loading)
-//
-//                    transformations(RoundedCornersTransformation())
-//                }
+                imgItemPhoto.load(eventItem.mediaCover)
+                {
+                    placeholder(R.drawable.ic_loading)
+                    Size(250, 250)
+                    Scale.FILL
+                }
                 tvItemName.text = eventItem.name
             }
         }
@@ -39,11 +40,17 @@ class EventAdapter: ListAdapter<ListEventsItem, EventAdapter.MyViewHolder>(DIFF_
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListEventsItem>() {
-            override fun areItemsTheSame(oldItem: ListEventsItem, newItem: ListEventsItem): Boolean {
+            override fun areItemsTheSame(
+                oldItem: ListEventsItem,
+                newItem: ListEventsItem
+            ): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: ListEventsItem, newItem: ListEventsItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: ListEventsItem,
+                newItem: ListEventsItem
+            ): Boolean {
                 return oldItem == newItem
             }
         }

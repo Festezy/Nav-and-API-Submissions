@@ -1,5 +1,6 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network
 
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.DetailEventResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -13,4 +14,6 @@ interface ApiService {
         @Query("active") active: String
     ): Call<EventResponse>
 
+    @GET("events/{id}")
+    fun getDetailEvent(@Path("id") id: String): Call<DetailEventResponse>
 }
