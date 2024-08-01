@@ -5,4 +5,9 @@
     <string name="title_finish_event">Finished</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail_eventBy">Oleh:</string>
+    <string name="detail_openUntil">Terbuka Hingga:</string>
+    <string name="detail_line">|</string>
+    <string name="detail_quota">Kuota:</string>
+    <string name="detail_participant">Peserta</string>
 </resources>
