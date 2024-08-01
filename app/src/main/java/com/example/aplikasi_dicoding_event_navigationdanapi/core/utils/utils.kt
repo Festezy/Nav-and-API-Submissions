@@ -1,16 +1,12 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.utils
 
 import android.os.Build
+import android.text.Spanned
 import androidx.annotation.RequiresApi
+import androidx.core.text.HtmlCompat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun convertDateToString(date: String): String {
-    val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
-    return date.format(formatter)
-}
 
 fun convertStringToFormattedString(inputString: String): String {
     val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -18,4 +14,13 @@ fun convertStringToFormattedString(inputString: String): String {
 
     val localDateTime = LocalDateTime.parse(inputString, inputFormatter)
     return localDateTime.format(outputFormatter)
+}
+
+fun convertHtmlToFormattedString(inputHtml: String): String{
+    val formatted = HtmlCompat.fromHtml(
+        inputHtml,
+        HtmlCompat.FROM_HTML_MODE_LEGACY
+    )
+
+    return formatted.toString()
 }
