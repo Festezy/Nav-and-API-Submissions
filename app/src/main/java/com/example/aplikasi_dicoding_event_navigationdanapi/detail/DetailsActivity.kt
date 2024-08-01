@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertHtmlToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedString
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.gotoUrl
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityDetailsBinding
 
 class DetailsActivity : AppCompatActivity() {
@@ -52,6 +53,8 @@ class DetailsActivity : AppCompatActivity() {
 
                 eventExpired.text = convertStringToFormattedString(result.endTime!!)
                 eventQuota.text = result.quota.toString()
+
+                eventRegisterButton.setOnClickListener { gotoUrl(this@DetailsActivity, result.link) }
             }
         }
     }

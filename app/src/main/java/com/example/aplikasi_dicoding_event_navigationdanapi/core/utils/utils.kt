@@ -1,8 +1,12 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.utils
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.text.Spanned
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.text.HtmlCompat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -23,4 +27,9 @@ fun convertHtmlToFormattedString(inputHtml: String): String{
     )
 
     return formatted.toString()
+}
+
+fun gotoUrl(context: Context, url: String?) {
+    val uri: Uri = Uri.parse(url)
+    context.startActivity(Intent(Intent.ACTION_VIEW, uri))
 }

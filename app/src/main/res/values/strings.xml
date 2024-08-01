@@ -11,4 +11,5 @@
     <string name="detail_quota">Kuota:</string>
     <string name="detail_participant">Peserta</string>
     <string name="detail_category">Kategori:</string>
+    <string name="detail_register">Register</string>
 </resources>
