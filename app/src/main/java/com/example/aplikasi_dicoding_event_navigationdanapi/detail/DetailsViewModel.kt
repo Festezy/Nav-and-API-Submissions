@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.DetailEventResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

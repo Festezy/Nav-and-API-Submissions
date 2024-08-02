@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
@@ -49,13 +48,23 @@ class DetailsActivity : AppCompatActivity() {
 //                    this.setSupportZoom(false)
 //                }
 //                eventWebView.setInitialScale(100)
-                eventDescriptions.text = result.description?.let { convertHtmlToFormattedString(it) }
+                eventDescriptions.text =
+                    result.description?.let { convertHtmlToFormattedString(it) }
 
                 eventExpired.text = result.endTime?.let { convertStringToFormattedString(it) }
                 eventQuota.text = result.quota.toString()
 
-                eventRegisterButton.setOnClickListener { gotoUrl(this@DetailsActivity, result.link) }
+                eventRegisterButton.setOnClickListener {
+                    gotoUrl(
+                        this@DetailsActivity,
+                        result.link
+                    )
+                }
             }
+        }
+
+        viewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
         }
     }
 

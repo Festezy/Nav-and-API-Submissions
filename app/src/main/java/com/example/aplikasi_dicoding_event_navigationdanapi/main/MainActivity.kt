@@ -1,21 +1,12 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.main
 
 import android.os.Bundle
-import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityMainBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventFragment
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
 import com.example.aplikasi_dicoding_event_navigationdanapi.upcoming.UpcomingFragment
-import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
