@@ -51,7 +51,7 @@ class DetailsActivity : AppCompatActivity() {
 //                eventWebView.setInitialScale(100)
                 eventDescriptions.text = result.description?.let { convertHtmlToFormattedString(it) }
 
-                eventExpired.text = convertStringToFormattedString(result.endTime!!)
+                eventExpired.text = result.endTime?.let { convertStringToFormattedString(it) }
                 eventQuota.text = result.quota.toString()
 
                 eventRegisterButton.setOnClickListener { gotoUrl(this@DetailsActivity, result.link) }
