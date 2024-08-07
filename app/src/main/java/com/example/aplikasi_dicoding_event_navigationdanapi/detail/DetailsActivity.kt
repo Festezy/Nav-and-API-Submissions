@@ -3,18 +3,28 @@ package com.example.aplikasi_dicoding_event_navigationdanapi.detail
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.example.aplikasi_dicoding_event_navigationdanapi.R
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertHtmlToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.gotoUrl
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityDetailsBinding
+import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.ViewModelFactory
 
 class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
+
+    private val viewModel by viewModels<DetailsViewModel>() {
+        ViewModelFactory.getInstance(application)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,15 +36,13 @@ class DetailsActivity : AppCompatActivity() {
             insets
         }
 
+        // data From intent
         val eventId = intent.getStringExtra(EXTRA_ID)
-
-        val viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        )[DetailsViewModel::class.java]
-        eventId.let { id ->
-            viewModel.getDetailData(id!!)
+        val eventEntity = intent.getParcelableExtra<EventEntity>(EXTRA_DATA)
+        eventId.let {
+            viewModel.getDetailData(it!!)
         }
+        getFavoriteData(eventEntity)
 
         viewModel.listEventDetail.observe(this) { result ->
             binding.apply {
@@ -42,12 +50,6 @@ class DetailsActivity : AppCompatActivity() {
                 eventCategory.text = result.category
                 eventTitle.text = result.name
                 eventOrganizer.text = result.ownerName
-//                eventWebView.loadDataWithBaseURL(null, result.description!!, "text/html", "UTF-8", null)
-//                eventWebView.settings.apply {
-//                    this.builtInZoomControls = false
-//                    this.setSupportZoom(false)
-//                }
-//                eventWebView.setInitialScale(100)
                 eventDescriptions.text =
                     result.description?.let { convertHtmlToFormattedString(it) }
 
@@ -68,15 +70,50 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
+    private fun getFavoriteData(favorite: EventEntity?) {
+        favorite?.let {
+            var statusFavorite = favorite.isFavorite
+            setStatusFavorite(statusFavorite)
+            binding.fab.setOnClickListener {
+                statusFavorite = !statusFavorite
+                viewModel.saveFavorite(favorite)
+                setStatusFavorite(statusFavorite)
+            }
+        }
+    }
+
+    private fun setStatusFavorite(statusFavorite: Boolean) {
+        binding.apply {
+            if (statusFavorite) {
+                fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this@DetailsActivity,
+                        R.drawable.baseline_favorite_fill_24
+                    )
+                )
+            } else {
+                fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this@DetailsActivity,
+                        R.drawable.baseline_favorite_border_24
+                    )
+                )
+            }
+        }
+    }
+
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
+        binding.apply {
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
         }
     }
 
     companion object {
         const val EXTRA_ID = "extra_id"
+        const val EXTRA_DATA = "extra_data"
     }
 }

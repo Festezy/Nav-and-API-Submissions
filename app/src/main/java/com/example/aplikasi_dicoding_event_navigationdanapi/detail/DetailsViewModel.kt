@@ -3,14 +3,18 @@ package com.example.aplikasi_dicoding_event_navigationdanapi.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.DetailEventResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailsViewModel: ViewModel() {
+class DetailsViewModel(private val eventsRepository: EventsRepository): ViewModel() {
     private val _listEventDetail = MutableLiveData<EventDetails>()
     val listEventDetail: LiveData<EventDetails> = _listEventDetail
 
@@ -18,6 +22,12 @@ class DetailsViewModel: ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     private val client = ApiConfig.getApiService()
+
+    fun saveFavorite(event: EventEntity){
+        viewModelScope.launch {
+            eventsRepository.setFavoriteEvent(event, true)
+        }
+    }
 
     fun getDetailData(id: String){
         _isLoading.value = true

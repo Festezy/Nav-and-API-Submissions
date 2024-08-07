@@ -13,7 +13,7 @@ class EventsRepository private constructor(
     private val apiService: ApiService,
     private val eventDao: EventDao,
     private val appExecutors: AppExecutors
-){
+) {
 
     fun getEvents(active: String): LiveData<ApiResult<List<EventEntity>>> = liveData {
         emit(ApiResult.Loading)
@@ -31,23 +31,25 @@ class EventsRepository private constructor(
             }
             eventDao.deleteAll()
             eventDao.insertEvent(eventsList)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             Log.d("NewsRepository", "getHeadlineNews: ${e.message.toString()} ")
             emit(ApiResult.Error(e.message.toString()))
         }
-        val localData: LiveData<ApiResult<List<EventEntity>>> = eventDao.getEvents().map { ApiResult.Success(it) }
+        val localData: LiveData<ApiResult<List<EventEntity>>> =
+            eventDao.getEvents().map { ApiResult.Success(it) }
         emitSource(localData)
     }
 
     fun getFavoriteEvent(): LiveData<List<EventEntity>> {
         return eventDao.getFavoriteEvent()
     }
+
     suspend fun setFavoriteEvent(events: EventEntity, favoriteState: Boolean) {
         events.isFavorite = favoriteState
-            eventDao.updateEvent(events)
+        eventDao.updateEvent(events)
     }
 
-    companion object{
+    companion object {
         @Volatile
         private var instance: EventsRepository? = null
         fun getInstance(
@@ -55,8 +57,8 @@ class EventsRepository private constructor(
             eventsDao: EventDao,
             appExecutors: AppExecutors
         ): EventsRepository =
-            instance ?: synchronized(this){
-                instance ?: EventsRepository(apiService,  eventsDao, appExecutors)
+            instance ?: synchronized(this) {
+                instance ?: EventsRepository(apiService, eventsDao, appExecutors)
             }.also { instance = it }
     }
 }

@@ -14,7 +14,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.loc
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ItemEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
 
-class EventAdapter : ListAdapter<EventEntity, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class EventAdapter() : ListAdapter<EventEntity, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(private val binding: ItemEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventItem: EventEntity) {
@@ -29,7 +29,8 @@ class EventAdapter : ListAdapter<EventEntity, EventAdapter.MyViewHolder>(DIFF_CA
 
                 root.setOnClickListener {
                     Intent(root.context, DetailsActivity::class.java).also { intent ->
-                        intent.putExtra(DetailsActivity.EXTRA_ID, eventItem.id.toString())
+                        intent.putExtra(DetailsActivity.EXTRA_ID, eventItem.id)
+                        intent.putExtra(DetailsActivity.EXTRA_DATA, eventItem)
                         it.context.startActivity(intent)
                     }
                 }
