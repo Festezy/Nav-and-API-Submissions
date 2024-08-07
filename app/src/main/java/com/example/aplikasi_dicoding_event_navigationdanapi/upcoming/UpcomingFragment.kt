@@ -4,16 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.ApiResult
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentUpcomingBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
+import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.ViewModelFactory
 
 class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by viewModels<UpcomingVIewModel>{
+        ViewModelFactory.getInstance(requireActivity())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,17 +34,36 @@ class UpcomingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[UpcomingVIewModel::class.java]
-        viewModel.getUpcomingEventList("")
-        viewModel.listEventItem.observe(viewLifecycleOwner){ item ->
-            setEventData(item)
+//        val viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[UpcomingVIewModel::class.java]
+        viewModel.getEvents().observe(viewLifecycleOwner){ apiResult ->
+            if (apiResult != null){
+                when(apiResult){
+                    is ApiResult.Loading -> {
+                        showLoading(true)
+                    }
+                    is ApiResult.Error -> {
+                        showLoading(false)
+                        Toast.makeText(context, apiResult.error, Toast.LENGTH_SHORT).show()
+                    }
+                    is ApiResult.Success -> {
+                        showLoading(false)
+                        val eventData = apiResult.data
+                        setEventData(eventData)
+                    }
+                }
+            }
+
         }
-        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading ->
-            showLoading(isLoading)
-        }
+//        viewModel.getUpcomingEventList("")
+//        viewModel.listEventItem.observe(viewLifecycleOwner){ item ->
+//            setEventData(item)
+//        }
+//        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading ->
+//            showLoading(isLoading)
+//        }
     }
 
-    private fun setEventData(consumerReviews: List<ListEventsItem>) {
+    private fun setEventData(consumerReviews: List<EventEntity>) {
         val adapter = EventAdapter()
         adapter.submitList(consumerReviews)
         binding.apply {

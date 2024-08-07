@@ -1,24 +1,54 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.data
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.room.EventDao
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiService
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
 
 class EventsRepository private constructor(
     private val apiService: ApiService,
-//    private val eventDao: EventDao,
+    private val eventDao: EventDao,
     private val appExecutors: AppExecutors
 ){
+
+    fun getEvents(): LiveData<ApiResult<List<EventEntity>>> = liveData {
+        emit(ApiResult.Loading)
+        try {
+            val response = apiService.getEvent("")
+            val events = response.listEvents
+            val eventsList = events.map { event ->
+                val isFavorite = eventDao.isEventFavorite(event.id.toString())
+                EventEntity(
+                    event.id.toString(),
+                    event.name!!,
+                    event.mediaCover,
+                    isFavorite
+                )
+            }
+            eventDao.deleteAll()
+            eventDao.insertEvent(eventsList)
+        } catch (e: Exception){
+            Log.d("NewsRepository", "getHeadlineNews: ${e.message.toString()} ")
+            emit(ApiResult.Error(e.message.toString()))
+        }
+        val localData: LiveData<ApiResult<List<EventEntity>>> = eventDao.getEvents().map { ApiResult.Success(it) }
+        emitSource(localData)
+    }
 
     companion object{
         @Volatile
         private var instance: EventsRepository? = null
         fun getInstance(
             apiService: ApiService,
-//            eventsDao: EventsDao,
+            eventsDao: EventDao,
             appExecutors: AppExecutors
         ): EventsRepository =
             instance ?: synchronized(this){
-                instance ?: EventsRepository(apiService,  appExecutors)
+                instance ?: EventsRepository(apiService,  eventsDao, appExecutors)
             }.also { instance = it }
     }
 }
