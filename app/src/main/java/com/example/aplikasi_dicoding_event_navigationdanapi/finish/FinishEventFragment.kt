@@ -27,29 +27,29 @@ class FinishEventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(
-            requireActivity(),
-            ViewModelProvider.NewInstanceFactory()
-        )[FinishEventViewModel::class.java]
-        viewModel.getFinishedEventList("0")
-        viewModel.listEventItem.observe(viewLifecycleOwner) { item ->
-            setEventData(item)
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            showLoading(isLoading)
-        }
+//        val viewModel = ViewModelProvider(
+//            requireActivity(),
+//            ViewModelProvider.NewInstanceFactory()
+//        )[FinishEventViewModel::class.java]
+//        viewModel.getFinishedEventList("0")
+//        viewModel.listEventItem.observe(viewLifecycleOwner) { item ->
+//            setEventData(item)
+//        }
+//        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+//            showLoading(isLoading)
+//        }
 
     }
 
-    private fun setEventData(consumerReviews: List<ListEventsItem>) {
-        val adapter = EventAdapter()
-        adapter.submitList(consumerReviews)
-        binding.apply {
-            rvEvent.setHasFixedSize(true)
-            rvEvent.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            rvEvent.adapter = adapter
-        }
-    }
+//    private fun setEventData(consumerReviews: List<ListEventsItem>) {
+//        val adapter = EventAdapter()
+//        adapter.submitList(consumerReviews)
+//        binding.apply {
+//            rvEvent.setHasFixedSize(true)
+//            rvEvent.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//            rvEvent.adapter = adapter
+//        }
+//    }
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {

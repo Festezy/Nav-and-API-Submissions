@@ -22,27 +22,27 @@ class FinishEventViewModel: ViewModel() {
 
     private val client = ApiConfig.getApiService()
 
-    fun getFinishedEventList(active: String){
-        _isLoading.value = true
-        client.getEvent(active).enqueue(object : Callback<EventResponse> {
-            override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
-                if (response.isSuccessful){
-                    _isLoading.value = false
-                    val responseBody = response.body()
-                    _listEventItem.value = responseBody!!.listEvents
-                } else {
-                    _isLoading.value = true
-                    Log.d(TAG, "onFailure: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<EventResponse>, t: Throwable) {
-                _isLoading.value = false
-                Log.d(TAG, "onFailure: ${t.message}")
-            }
-
-        })
-    }
+//    fun getFinishedEventList(active: String){
+//        _isLoading.value = true
+//        client.getEvent(active).enqueue(object : Callback<EventResponse> {
+//            override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
+//                if (response.isSuccessful){
+//                    _isLoading.value = false
+//                    val responseBody = response.body()
+//                    _listEventItem.value = responseBody!!.listEvents
+//                } else {
+//                    _isLoading.value = true
+//                    Log.d(TAG, "onFailure: ${response.message()}")
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<EventResponse>, t: Throwable) {
+//                _isLoading.value = false
+//                Log.d(TAG, "onFailure: ${t.message}")
+//            }
+//
+//        })
+//    }
 
     companion object{
         private const val TAG = "FinishEventViewModel"
