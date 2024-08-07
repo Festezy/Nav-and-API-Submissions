@@ -15,10 +15,10 @@ class EventsRepository private constructor(
     private val appExecutors: AppExecutors
 ){
 
-    fun getEvents(): LiveData<ApiResult<List<EventEntity>>> = liveData {
+    fun getEvents(active: String): LiveData<ApiResult<List<EventEntity>>> = liveData {
         emit(ApiResult.Loading)
         try {
-            val response = apiService.getEvent("")
+            val response = apiService.getEvent(active)
             val events = response.listEvents
             val eventsList = events.map { event ->
                 val isFavorite = eventDao.isEventFavorite(event.id.toString())

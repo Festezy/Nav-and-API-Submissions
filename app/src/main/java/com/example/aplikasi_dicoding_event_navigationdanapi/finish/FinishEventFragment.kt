@@ -4,16 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.ApiResult
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFinishEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
+import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.ViewModelFactory
 
 class FinishEventFragment : Fragment() {
     private var _binding: FragmentFinishEventBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by viewModels<FinishEventViewModel>{
+        ViewModelFactory.getInstance(requireActivity())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,17 +46,36 @@ class FinishEventFragment : Fragment() {
 //            showLoading(isLoading)
 //        }
 
+        viewModel.getEvents().observe(viewLifecycleOwner){ apiResult ->
+            if (apiResult != null){
+                when(apiResult){
+                    is ApiResult.Loading -> {
+                        showLoading(true)
+                    }
+                    is ApiResult.Error -> {
+                        showLoading(false)
+                        Toast.makeText(context, apiResult.error, Toast.LENGTH_SHORT).show()
+                    }
+                    is ApiResult.Success -> {
+                        showLoading(false)
+                        val eventData = apiResult.data
+                        setEventData(eventData)
+                    }
+                }
+            }
+        }
+
     }
 
-//    private fun setEventData(consumerReviews: List<ListEventsItem>) {
-//        val adapter = EventAdapter()
-//        adapter.submitList(consumerReviews)
-//        binding.apply {
-//            rvEvent.setHasFixedSize(true)
-//            rvEvent.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-//            rvEvent.adapter = adapter
-//        }
-//    }
+    private fun setEventData(consumerReviews: List<EventEntity>) {
+        val adapter = EventAdapter()
+        adapter.submitList(consumerReviews)
+        binding.apply {
+            rvEvent.setHasFixedSize(true)
+            rvEvent.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            rvEvent.adapter = adapter
+        }
+    }
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {

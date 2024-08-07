@@ -18,7 +18,7 @@ class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<UpcomingVIewModel>{
+    private val viewModel by viewModels<UpcomingVIewModel> {
         ViewModelFactory.getInstance(requireActivity())
     }
 
@@ -34,7 +34,6 @@ class UpcomingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[UpcomingVIewModel::class.java]
         viewModel.getEvents().observe(viewLifecycleOwner){ apiResult ->
             if (apiResult != null){
                 when(apiResult){
@@ -54,13 +53,6 @@ class UpcomingFragment : Fragment() {
             }
 
         }
-//        viewModel.getUpcomingEventList("")
-//        viewModel.listEventItem.observe(viewLifecycleOwner){ item ->
-//            setEventData(item)
-//        }
-//        viewModel.isLoading.observe(viewLifecycleOwner){ isLoading ->
-//            showLoading(isLoading)
-//        }
     }
 
     private fun setEventData(consumerReviews: List<EventEntity>) {

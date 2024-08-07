@@ -5,15 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
 import com.example.aplikasi_dicoding_event_navigationdanapi.di.Injection
+import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventViewModel
 import com.example.aplikasi_dicoding_event_navigationdanapi.upcoming.UpcomingVIewModel
 
 class ViewModelFactory private constructor(
     private val eventsRepository: EventsRepository
-): ViewModelProvider.NewInstanceFactory(){
+) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UpcomingVIewModel::class.java)) {
             return UpcomingVIewModel(eventsRepository) as T
+        } else if (modelClass.isAssignableFrom(FinishEventViewModel::class.java)) {
+            return FinishEventViewModel(eventsRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

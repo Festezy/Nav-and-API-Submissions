@@ -21,28 +21,7 @@ class UpcomingVIewModel(private val eventsRepository: EventsRepository): ViewMod
 
     private val client = ApiConfig.getApiService()
 
-    fun getEvents() = eventsRepository.getEvents()
-//    fun getUpcomingEventList(active: String){
-//        _isLoading.value = true
-//        client.getEvent(active).enqueue(object : Callback<EventResponse> {
-//            override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
-//                if (response.isSuccessful){
-//                    _isLoading.value = false
-//                    val responseBody = response.body()
-//                    _listEventItem.value = responseBody!!.listEvents
-//                } else {
-//                    _isLoading.value = true
-//                    Log.d(TAG, "onFailure: ${response.message()}")
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<EventResponse>, t: Throwable) {
-//                _isLoading.value = false
-//                Log.d(TAG, "onFailure: ${t.message}")
-//            }
-//
-//        })
-//    }
+    fun getEvents() = eventsRepository.getEvents("1")
 
     companion object{
         private const val TAG = "MainViewModel"
