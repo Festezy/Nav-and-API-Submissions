@@ -39,6 +39,14 @@ class EventsRepository private constructor(
         emitSource(localData)
     }
 
+    fun getFavoriteEvent(): LiveData<List<EventEntity>> {
+        return eventDao.getFavoriteEvent()
+    }
+    suspend fun setFavoriteEvent(events: EventEntity, favoriteState: Boolean) {
+        events.isFavorite = favoriteState
+            eventDao.updateEvent(events)
+    }
+
     companion object{
         @Volatile
         private var instance: EventsRepository? = null
