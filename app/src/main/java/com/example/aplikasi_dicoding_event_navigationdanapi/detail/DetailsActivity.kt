@@ -76,7 +76,7 @@ class DetailsActivity : AppCompatActivity() {
             setStatusFavorite(statusFavorite)
             binding.fab.setOnClickListener {
                 statusFavorite = !statusFavorite
-                viewModel.saveFavorite(favorite)
+                viewModel.saveFavorite(favorite, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
         }

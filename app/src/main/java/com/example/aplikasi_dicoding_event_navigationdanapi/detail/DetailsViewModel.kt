@@ -23,9 +23,9 @@ class DetailsViewModel(private val eventsRepository: EventsRepository): ViewMode
 
     private val client = ApiConfig.getApiService()
 
-    fun saveFavorite(event: EventEntity){
+    fun saveFavorite(event: EventEntity, newStatus: Boolean){
         viewModelScope.launch {
-            eventsRepository.setFavoriteEvent(event, true)
+            eventsRepository.setFavoriteEvent(event, newStatus)
         }
     }
 
