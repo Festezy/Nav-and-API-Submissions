@@ -4,7 +4,9 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.rem
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
 
 class EventsRepository private constructor(
-
+    private val apiService: ApiService,
+//    private val eventDao: EventDao,
+    private val appExecutors: AppExecutors
 ){
 
     companion object{
