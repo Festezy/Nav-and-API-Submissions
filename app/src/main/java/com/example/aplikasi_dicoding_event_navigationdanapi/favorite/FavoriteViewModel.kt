@@ -10,9 +10,11 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.loc
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel(private val eventsRepository: EventsRepository): ViewModel() {
+class FavoriteViewModel(private val eventsRepository: EventsRepository) : ViewModel() {
     private val _listFavoriteEvents = MutableLiveData<List<EventEntity>>()
-    val listFavoriteEvents : LiveData<List<EventEntity>> = _listFavoriteEvents
+    val listFavoriteEvents: LiveData<List<EventEntity>> = _listFavoriteEvents
+
+    private val favoriteEvents = eventsRepository.getFavoriteEvent().asFlow()
 
     fun getFavoriteEvents() =
         viewModelScope.launch {
@@ -20,6 +22,4 @@ class FavoriteViewModel(private val eventsRepository: EventsRepository): ViewMod
                 _listFavoriteEvents.value = it
             }
         }
-
-    val favoriteEvents = eventsRepository.getFavoriteEvent().asFlow()
 }

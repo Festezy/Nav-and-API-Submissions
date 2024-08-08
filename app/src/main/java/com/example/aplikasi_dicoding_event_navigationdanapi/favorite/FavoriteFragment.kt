@@ -1,28 +1,22 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFavoriteBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventViewModel
 import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
 import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.ViewModelFactory
-import kotlinx.coroutines.job
-import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<FavoriteViewModel>{
+    private val viewModel by viewModels<FavoriteViewModel> {
         ViewModelFactory.getInstance(requireActivity())
     }
 
@@ -39,7 +33,7 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getFavoriteEvents()
-        viewModel.listFavoriteEvents.observe(viewLifecycleOwner){ favoriteEventList ->
+        viewModel.listFavoriteEvents.observe(viewLifecycleOwner) { favoriteEventList ->
             setFavoriteEventData(favoriteEventList)
         }
     }
