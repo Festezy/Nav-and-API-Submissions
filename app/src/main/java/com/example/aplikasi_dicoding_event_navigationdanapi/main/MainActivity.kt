@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityMainBinding
+import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.FavoriteFragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventFragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.upcoming.UpcomingFragment
 
@@ -26,6 +27,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_finish_event -> {
                     setCurrentFragment(FinishEventFragment())
+                    true
+                }
+
+                R.id.navigation_favorite_event ->{
+                    setCurrentFragment(FavoriteFragment())
                     true
                 }
 

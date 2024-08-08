@@ -11,4 +11,9 @@
         android:icon="@drawable/ic_finishevent_24"
         android:title="@string/title_finish_event" />
 
+    <item
+        android:id="@+id/navigation_favorite_event"
+        android:icon="@drawable/baseline_favorite_black_24"
+        android:title="@string/title_favorite" />
+
 </menu>

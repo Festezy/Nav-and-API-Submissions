@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
 import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsViewModel
 import com.example.aplikasi_dicoding_event_navigationdanapi.di.Injection
+import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.FavoriteViewModel
 import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventViewModel
 import com.example.aplikasi_dicoding_event_navigationdanapi.upcoming.UpcomingVIewModel
 
@@ -20,6 +21,8 @@ class ViewModelFactory private constructor(
             return FinishEventViewModel(eventsRepository) as T
         } else if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
             return DetailsViewModel(eventsRepository) as T
+        } else if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
+            return FavoriteViewModel(eventsRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
