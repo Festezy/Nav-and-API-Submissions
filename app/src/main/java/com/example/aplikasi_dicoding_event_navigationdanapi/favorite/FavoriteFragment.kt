@@ -54,4 +54,9 @@ class FavoriteFragment : Fragment() {
             else progressBar.visibility = View.GONE
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
