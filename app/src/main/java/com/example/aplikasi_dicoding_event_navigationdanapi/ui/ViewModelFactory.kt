@@ -1,4 +1,4 @@
-package com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter
+package com.example.aplikasi_dicoding_event_navigationdanapi.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

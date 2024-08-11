@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFavoriteBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.ui.ViewModelFactory
 
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
@@ -32,10 +32,12 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showLoading(true)
         viewModel.getFavoriteEvents()
         viewModel.listFavoriteEvents.observe(viewLifecycleOwner) { favoriteEventList ->
             setFavoriteEventData(favoriteEventList)
         }
+        showLoading(false)
     }
 
     private fun setFavoriteEventData(eventData: List<EventEntity>) {
@@ -53,5 +55,10 @@ class FavoriteFragment : Fragment() {
             if (isLoading) progressBar.visibility = View.VISIBLE
             else progressBar.visibility = View.GONE
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

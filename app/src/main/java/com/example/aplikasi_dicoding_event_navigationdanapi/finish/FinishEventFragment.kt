@@ -12,7 +12,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.ApiResult
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFinishEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.ui.ViewModelFactory
 
 class FinishEventFragment : Fragment() {
     private var _binding: FragmentFinishEventBinding? = null

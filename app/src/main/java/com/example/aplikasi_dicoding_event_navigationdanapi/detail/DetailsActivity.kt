@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
@@ -16,7 +15,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertHt
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.gotoUrl
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityDetailsBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.ui.ViewModelFactory
 
 class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
