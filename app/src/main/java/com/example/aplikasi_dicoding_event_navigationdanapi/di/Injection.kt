@@ -5,6 +5,8 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepo
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.room.EventDatabase
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.SettingPreferences
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.dataStore
 
 object Injection {
     fun provideRepository(context: Context): EventsRepository {
@@ -13,5 +15,10 @@ object Injection {
         val dao = database.eventDao()
         val appExecutors = AppExecutors()
         return EventsRepository.getInstance(apiService,  dao, appExecutors)
+    }
+
+    fun providePreferences(context: Context): SettingPreferences{
+        val pref = context.dataStore
+        return SettingPreferences.getInstance(pref)
     }
 }
