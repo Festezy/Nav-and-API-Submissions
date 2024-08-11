@@ -1,4 +1,4 @@
-package com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter
+package com.example.aplikasi_dicoding_event_navigationdanapi.core.ui
 
 import android.content.Intent
 import android.view.LayoutInflater

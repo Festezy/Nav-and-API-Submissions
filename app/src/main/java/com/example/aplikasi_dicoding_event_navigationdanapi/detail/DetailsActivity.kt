@@ -15,7 +15,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertHt
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.gotoUrl
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityDetailsBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
 
 class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding

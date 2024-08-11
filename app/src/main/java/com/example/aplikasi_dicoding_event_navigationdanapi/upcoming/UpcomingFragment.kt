@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.ApiResult
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentUpcomingBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
 
 class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null

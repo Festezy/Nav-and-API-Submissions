@@ -1,4 +1,4 @@
-package com.example.aplikasi_dicoding_event_navigationdanapi.di
+package com.example.aplikasi_dicoding_event_navigationdanapi.core.di
 
 import android.content.Context
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository

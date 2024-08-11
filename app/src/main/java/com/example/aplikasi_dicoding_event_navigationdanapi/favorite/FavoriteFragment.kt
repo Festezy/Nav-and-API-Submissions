@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFavoriteBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.adapter.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.ui.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
 
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
