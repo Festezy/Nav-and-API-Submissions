@@ -21,7 +21,7 @@ class UpcomingVIewModel(private val eventsRepository: EventsRepository): ViewMod
 
     private val client = ApiConfig.getApiService()
 
-    fun getEvents() = eventsRepository.getEvents("1")
+    fun getEvents() = eventsRepository.getEvents()
 
     companion object{
         private const val TAG = "MainViewModel"

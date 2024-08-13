@@ -40,7 +40,7 @@ class UpcomingFragment : Fragment() {
                     is Resource.Loading -> {
                         showLoading(true)
                     }
-                    is Resource.Error -> {
+                    is Resource.Error<*> -> {
                         showLoading(false)
                         Toast.makeText(context, apiResult.error, Toast.LENGTH_SHORT).show()
                     }

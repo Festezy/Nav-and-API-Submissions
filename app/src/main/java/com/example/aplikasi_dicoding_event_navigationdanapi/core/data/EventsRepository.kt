@@ -20,7 +20,7 @@ class EventsRepository private constructor(
     private val appExecutors: AppExecutors
 ) {
 
-    fun getEvents(active: String): LiveData<Resource<List<EventEntity>>> =
+    fun getEvents(): LiveData<Resource<List<EventEntity>>> =
         object : NetworkBoundResource<List<EventEntity>, List<ListEventsItem>>(appExecutors) {
             override fun loadFromDB(): LiveData<List<EventEntity>> {
                 return localDataSource.getEvents()
@@ -30,7 +30,7 @@ class EventsRepository private constructor(
                 data == null || data.isEmpty()
 
             override suspend fun createCall(): LiveData<ApiResponse<List<ListEventsItem>>> =
-                remoteDataSource.getEvents(active)
+                remoteDataSource.getEvents()
 
             override suspend fun saveCallResult(data: List<ListEventsItem>) {
                 val eventList = DataMapper.mapResponsesToEntities(data)

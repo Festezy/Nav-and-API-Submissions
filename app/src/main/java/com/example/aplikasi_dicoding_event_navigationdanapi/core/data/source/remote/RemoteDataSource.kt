@@ -9,10 +9,10 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.rem
 
 class RemoteDataSource private constructor(private val apiService: ApiService) {
 
-    suspend fun getEvents(active: String): LiveData<ApiResponse<List<ListEventsItem>>> {
+    suspend fun getEvents(): LiveData<ApiResponse<List<ListEventsItem>>> {
         val resultData = MutableLiveData<ApiResponse<List<ListEventsItem>>>()
         try {
-            val response = apiService.getEvent(active)
+            val response = apiService.getEvent()
             val events = response.listEvents
             resultData.value =
                 if (events != null) ApiResponse.Success(events) else ApiResponse.Empty

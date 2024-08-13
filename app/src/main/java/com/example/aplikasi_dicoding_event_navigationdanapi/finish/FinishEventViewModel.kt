@@ -23,7 +23,7 @@ class FinishEventViewModel(private val eventsRepository: EventsRepository): View
 
     private val client = ApiConfig.getApiService()
 
-    fun getEvents() = eventsRepository.getEvents("0")
+    fun getEvents() = eventsRepository.getEvents()
 
     companion object{
         private const val TAG = "FinishEventViewModel"

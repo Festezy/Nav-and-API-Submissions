@@ -11,7 +11,6 @@ interface ApiService {
 
     @GET("events")
     suspend fun getEvent(
-        @Query("active") active: String
     ): EventResponse
 
     @GET("events/{id}")
