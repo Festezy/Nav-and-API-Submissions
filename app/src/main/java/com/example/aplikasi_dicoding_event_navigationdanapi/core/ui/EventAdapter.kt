@@ -21,7 +21,7 @@ class EventAdapter() : ListAdapter<EventEntity, EventAdapter.MyViewHolder>(DIFF_
             binding.apply {
                 imgItemPhoto.load(eventItem.mediaCover)
                 {
-                    placeholder(R.drawable.ic_loading)
+                    placeholder(R.drawable.ic_error)
                     Size(250, 250)
                     Scale.FILL
                 }
