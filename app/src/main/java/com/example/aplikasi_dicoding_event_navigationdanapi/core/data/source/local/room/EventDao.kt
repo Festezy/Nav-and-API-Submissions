@@ -17,14 +17,14 @@ interface EventDao {
     fun getFavoriteEvent(): LiveData<List<EventEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertEvent(event: List<EventEntity>)
+    fun insertEvent(event: List<EventEntity>)
 
     @Update
-    suspend fun updateEvent(event: EventEntity)
+    fun updateEvent(event: EventEntity)
 
     @Query("DELETE FROM event WHERE isFavorite = 0")
-    suspend fun deleteAll()
+    fun deleteAll()
 
     @Query("SELECT EXISTS(SELECT * FROM event WHERE id = :id AND isFavorite = 1)")
-    suspend fun isEventFavorite(id: String): Boolean
+    fun isEventFavorite(id: String): Boolean
 }

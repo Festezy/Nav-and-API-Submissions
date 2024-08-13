@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.ApiResult
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentUpcomingBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
@@ -37,14 +37,14 @@ class UpcomingFragment : Fragment() {
         viewModel.getEvents().observe(viewLifecycleOwner){ apiResult ->
             if (apiResult != null){
                 when(apiResult){
-                    is ApiResult.Loading -> {
+                    is Resource.Loading -> {
                         showLoading(true)
                     }
-                    is ApiResult.Error -> {
+                    is Resource.Error -> {
                         showLoading(false)
                         Toast.makeText(context, apiResult.error, Toast.LENGTH_SHORT).show()
                     }
-                    is ApiResult.Success -> {
+                    is Resource.Success -> {
                         showLoading(false)
                         val eventData = apiResult.data
                         setEventData(eventData)
