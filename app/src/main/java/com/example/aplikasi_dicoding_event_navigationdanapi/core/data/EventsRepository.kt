@@ -38,7 +38,16 @@ class EventsRepository private constructor(
             }
         }.asLiveData()
 
-//    fun getEvents(active: String): LiveData<Resource<List<EventEntity>>> = liveData {
+
+    fun getFavoriteEvent(): LiveData<List<EventEntity>> {
+        return localDataSource.getFavoriteEvent()
+    }
+
+    fun setFavoriteEvent(events: EventEntity, favoriteState: Boolean) {
+        appExecutors.diskIO.execute { localDataSource.setFavoriteEvent(events, favoriteState) }
+    }
+
+    //    fun getEvents(active: String): LiveData<Resource<List<EventEntity>>> = liveData {
 //        emit(Resource.Loading)
 //        try {
 //            val response = apiService.getEvent(active)
@@ -62,14 +71,6 @@ class EventsRepository private constructor(
 //            eventDao.getEvents().map { Resource.Success(it) }
 //        emitSource(localData)
 //    }
-
-    fun getFavoriteEvent(): LiveData<List<EventEntity>> {
-        return localDataSource.getFavoriteEvent()
-    }
-
-    fun setFavoriteEvent(events: EventEntity, favoriteState: Boolean) {
-        appExecutors.diskIO.execute { localDataSource.setFavoriteEvent(events, favoriteState) }
-    }
 
     companion object {
         @Volatile
