@@ -10,14 +10,14 @@ import coil.load
 import coil.size.Scale
 import coil.size.Size
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ItemEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
 
-class EventAdapter() : ListAdapter<EventEntity, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class EventAdapter() : ListAdapter<Events, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(private val binding: ItemEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(eventItem: EventEntity) {
+        fun bind(eventItem: Events) {
             binding.apply {
                 imgItemPhoto.load(eventItem.mediaCover)
                 {
@@ -49,17 +49,17 @@ class EventAdapter() : ListAdapter<EventEntity, EventAdapter.MyViewHolder>(DIFF_
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<EventEntity>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Events>() {
             override fun areItemsTheSame(
-                oldItem: EventEntity,
-                newItem: EventEntity
+                oldItem: Events,
+                newItem: Events
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: EventEntity,
-                newItem: EventEntity
+                oldItem: Events,
+                newItem: Events
             ): Boolean {
                 return oldItem == newItem
             }

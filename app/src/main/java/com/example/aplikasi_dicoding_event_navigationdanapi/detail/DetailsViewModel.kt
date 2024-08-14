@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.DetailEventResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailsViewModel(private val eventsRepository: EventsRepository): ViewModel() {
+class DetailsViewModel(private val eventsRepository: EventsRepository) : ViewModel() {
     private val _listEventDetail = MutableLiveData<EventDetails>()
     val listEventDetail: LiveData<EventDetails> = _listEventDetail
 
@@ -23,20 +23,20 @@ class DetailsViewModel(private val eventsRepository: EventsRepository): ViewMode
 
     private val client = ApiConfig.getApiService()
 
-    fun saveFavorite(event: EventEntity, newStatus: Boolean){
+    fun saveFavorite(event: Events, newStatus: Boolean) {
         viewModelScope.launch {
             eventsRepository.setFavoriteEvent(event, newStatus)
         }
     }
 
-    fun getDetailData(id: String){
+    fun getDetailData(id: String) {
         _isLoading.value = true
-        client.getDetailEvent(id).enqueue(object : Callback<DetailEventResponse>{
+        client.getDetailEvent(id).enqueue(object : Callback<DetailEventResponse> {
             override fun onResponse(
                 call: Call<DetailEventResponse>,
                 response: Response<DetailEventResponse>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     _isLoading.value = false
                     _listEventDetail.value = response.body()!!.event
                 } else {
@@ -51,7 +51,7 @@ class DetailsViewModel(private val eventsRepository: EventsRepository): ViewMode
         })
     }
 
-    companion object{
+    companion object {
         private const val TAG = "DetailsViewModel"
     }
 }

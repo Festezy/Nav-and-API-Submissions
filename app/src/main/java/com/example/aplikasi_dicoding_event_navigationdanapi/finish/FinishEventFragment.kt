@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFinishEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
@@ -67,7 +68,7 @@ class FinishEventFragment : Fragment() {
 
     }
 
-    private fun setEventData(consumerReviews: List<EventEntity>) {
+    private fun setEventData(consumerReviews: List<Events>) {
         val adapter = EventAdapter()
         adapter.submitList(consumerReviews)
         binding.apply {

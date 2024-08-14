@@ -42,7 +42,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
 
         val apiResponse = createCall()
 
-        result.addSource(dbSource) { newData ->
+        result.addSource(dbSource) { _ ->
             result.value = Resource.Loading
         }
         result.addSource(apiResponse) { response ->

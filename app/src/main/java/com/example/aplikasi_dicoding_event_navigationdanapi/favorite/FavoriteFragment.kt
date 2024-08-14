@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFavoriteBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
@@ -40,7 +41,7 @@ class FavoriteFragment : Fragment() {
         showLoading(false)
     }
 
-    private fun setFavoriteEventData(eventData: List<EventEntity>) {
+    private fun setFavoriteEventData(eventData: List<Events>) {
         val adapter = EventAdapter()
         adapter.submitList(eventData)
         binding.apply {
