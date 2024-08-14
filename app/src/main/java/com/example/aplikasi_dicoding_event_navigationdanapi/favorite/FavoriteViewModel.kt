@@ -5,17 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsUseCase
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel(private val eventsRepository: EventsRepository) : ViewModel() {
+class FavoriteViewModel(private val eventsUseCase: EventsUseCase) : ViewModel() {
     private val _listFavoriteEvents = MutableLiveData<List<Events>>()
     val listFavoriteEvents: LiveData<List<Events>> = _listFavoriteEvents
 
-    private val favoriteEvents = eventsRepository.getFavoriteEvent().asFlow()
+    private val favoriteEvents = eventsUseCase.getFavoriteEvent().asFlow()
 
     fun getFavoriteEvents() =
         viewModelScope.launch {

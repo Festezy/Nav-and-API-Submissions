@@ -6,10 +6,13 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.loc
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.room.EventDatabase
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.RemoteDataSource
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.repository.IEventsRepository
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsInteractor
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsUseCase
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
 
 object Injection {
-    fun provideRepository(context: Context): EventsRepository {
+    fun provideRepository(context: Context): IEventsRepository {
         val apiService = ApiConfig.getApiService()
         val remoteDataSource = RemoteDataSource.getInstance(apiService)
 
@@ -18,6 +21,11 @@ object Injection {
         val localDataSource = LocalDataSource.getInstance(dao)
 
         val appExecutors = AppExecutors()
-        return EventsRepository.getInstance(remoteDataSource,  localDataSource, appExecutors)
+        return EventsRepository.getInstance(remoteDataSource, localDataSource, appExecutors)
+    }
+
+    fun provideEventsUseCase(context: Context): EventsUseCase {
+        val repository = provideRepository(context)
+        return EventsInteractor(repository)
     }
 }

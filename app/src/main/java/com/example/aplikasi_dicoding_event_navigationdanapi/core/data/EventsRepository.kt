@@ -7,6 +7,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.rem
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.repository.IEventsRepository
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.DataMapper
 
@@ -14,9 +15,9 @@ class EventsRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
-) {
+): IEventsRepository {
 
-    fun getEvents(): LiveData<Resource<List<Events>>> =
+    override fun getEvents(): LiveData<Resource<List<Events>>> =
         object : NetworkBoundResource<List<Events>, List<ListEventsItem>>(appExecutors) {
             override fun loadFromDB(): LiveData<List<Events>> {
                 return localDataSource.getEvents().map {
@@ -38,14 +39,14 @@ class EventsRepository private constructor(
         }.asLiveData()
 
 
-    fun getFavoriteEvent(): LiveData<List<Events>> {
+    override fun getFavoriteEvent(): LiveData<List<Events>> {
         return localDataSource.getFavoriteEvent().map {
             DataMapper.mapEntitiesToDomain(it)
         }
 //        return localDataSource.getFavoriteEvent()
     }
 
-    fun setFavoriteEvent(events: Events, favoriteState: Boolean) {
+    override fun setFavoriteEvent(events: Events, favoriteState: Boolean) {
         val eventsEntity = DataMapper.mapDomainToEntity(events)
         appExecutors.diskIO.execute { localDataSource.setFavoriteEvent(eventsEntity, favoriteState) }
     }

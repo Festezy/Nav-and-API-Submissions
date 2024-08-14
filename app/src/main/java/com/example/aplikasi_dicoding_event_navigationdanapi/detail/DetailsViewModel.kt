@@ -4,17 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.DetailEventResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsUseCase
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailsViewModel(private val eventsRepository: EventsRepository) : ViewModel() {
+class DetailsViewModel(private val eventsUseCase: EventsUseCase) : ViewModel() {
     private val _listEventDetail = MutableLiveData<EventDetails>()
     val listEventDetail: LiveData<EventDetails> = _listEventDetail
 
@@ -25,7 +25,7 @@ class DetailsViewModel(private val eventsRepository: EventsRepository) : ViewMod
 
     fun saveFavorite(event: Events, newStatus: Boolean) {
         viewModelScope.launch {
-            eventsRepository.setFavoriteEvent(event, newStatus)
+            eventsUseCase.setFavoriteEvent(event, newStatus)
         }
     }
 

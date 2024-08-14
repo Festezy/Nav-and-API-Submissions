@@ -1,18 +1,13 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.upcoming
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsUseCase
 
-class UpcomingVIewModel(private val eventsRepository: EventsRepository): ViewModel() {
+class UpcomingVIewModel(private val eventsUseCase: EventsUseCase) : ViewModel() {
     private val _listEventItem = MutableLiveData<List<ListEventsItem>>()
     val listEventItem: LiveData<List<ListEventsItem>> = _listEventItem
 
@@ -21,9 +16,9 @@ class UpcomingVIewModel(private val eventsRepository: EventsRepository): ViewMod
 
     private val client = ApiConfig.getApiService()
 
-    fun getEvents() = eventsRepository.getEvents()
+    fun getEvents() = eventsUseCase.getEvents()
 
-    companion object{
+    companion object {
         private const val TAG = "MainViewModel"
     }
 }
