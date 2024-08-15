@@ -12,7 +12,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
 
 object Injection {
-    fun provideRepository(context: Context): IEventsRepository {
+    private fun provideRepository(context: Context): IEventsRepository {
         val apiService = ApiConfig.getApiService()
         val remoteDataSource = RemoteDataSource.getInstance(apiService)
 
