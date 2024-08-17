@@ -1,9 +1,8 @@
-package com.example.aplikasi_dicoding_event_navigationdanapi.main
+package com.example.aplikasi_dicoding_event_navigationdanapi
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityMainBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.FavoriteFragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventFragment

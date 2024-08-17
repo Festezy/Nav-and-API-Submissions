@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
+    id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
 //    id("com.google.devtools.ksp")
 }
@@ -64,6 +65,9 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.android.gradle.plugin)
+    ksp(libs.hilt.android.compiler)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.kotlinx.coroutines.android)
