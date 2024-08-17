@@ -7,7 +7,9 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.Activity
 import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.FavoriteFragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventFragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.upcoming.UpcomingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.navigation_favorite_event ->{
+                R.id.navigation_favorite_event -> {
                     setCurrentFragment(FavoriteFragment())
                     true
                 }

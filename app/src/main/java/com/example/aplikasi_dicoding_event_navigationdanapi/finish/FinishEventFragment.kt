@@ -9,19 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
-import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFinishEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFinishEventBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FinishEventFragment : Fragment() {
     private var _binding: FragmentFinishEventBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<FinishEventViewModel>{
-        ViewModelFactory.getInstance(requireActivity())
-    }
+    private val viewModel by viewModels<FinishEventViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,16 +45,18 @@ class FinishEventFragment : Fragment() {
 //            showLoading(isLoading)
 //        }
 
-        viewModel.getEvents().observe(viewLifecycleOwner){ apiResult ->
-            if (apiResult != null){
-                when(apiResult){
+        viewModel.getEvents().observe(viewLifecycleOwner) { apiResult ->
+            if (apiResult != null) {
+                when (apiResult) {
                     is Resource.Loading -> {
                         showLoading(true)
                     }
+
                     is Resource.Error<*> -> {
                         showLoading(false)
                         Toast.makeText(context, apiResult.error, Toast.LENGTH_SHORT).show()
                     }
+
                     is Resource.Success -> {
                         showLoading(false)
                         val eventData = apiResult.data
@@ -73,7 +73,8 @@ class FinishEventFragment : Fragment() {
         adapter.submitList(consumerReviews)
         binding.apply {
             rvEvent.setHasFixedSize(true)
-            rvEvent.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            rvEvent.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             rvEvent.adapter = adapter
         }
     }

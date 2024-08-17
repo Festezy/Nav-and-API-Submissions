@@ -9,19 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
-import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentUpcomingBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentUpcomingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UpcomingFragment : Fragment() {
     private var _binding: FragmentUpcomingBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<UpcomingVIewModel> {
-        ViewModelFactory.getInstance(requireActivity())
-    }
+    private val viewModel by viewModels<UpcomingVIewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +33,18 @@ class UpcomingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getEvents().observe(viewLifecycleOwner){ apiResult ->
-            if (apiResult != null){
-                when(apiResult){
+        viewModel.getEvents().observe(viewLifecycleOwner) { apiResult ->
+            if (apiResult != null) {
+                when (apiResult) {
                     is Resource.Loading -> {
                         showLoading(true)
                     }
+
                     is Resource.Error<*> -> {
                         showLoading(false)
                         Toast.makeText(context, apiResult.error, Toast.LENGTH_SHORT).show()
                     }
+
                     is Resource.Success -> {
                         showLoading(false)
                         val eventData = apiResult.data

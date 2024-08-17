@@ -11,18 +11,17 @@ import androidx.core.view.WindowInsetsCompat
 import coil.load
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertHtmlToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.gotoUrl
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
 
-    private val viewModel by viewModels<DetailsViewModel>() {
-        ViewModelFactory.getInstance(application)
-    }
+    private val viewModel by viewModels<DetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +38,7 @@ class DetailsActivity : AppCompatActivity() {
         val eventId = intent.getStringExtra(EXTRA_ID)
         val eventEntity = intent.getParcelableExtra<Events>(EXTRA_DATA)
         eventId.let {
-            viewModel.getDetailData(it!!)
+//            viewModel.getDetailData(it!!)
         }
         getFavoriteData(eventEntity)
 

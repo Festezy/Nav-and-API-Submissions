@@ -7,20 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
-import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFavoriteBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.ViewModelFactory
+import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFavoriteBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<FavoriteViewModel> {
-        ViewModelFactory.getInstance(requireActivity())
-    }
-
+    private val viewModel by viewModels<FavoriteViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
