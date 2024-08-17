@@ -10,6 +10,8 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Ev
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.repository.IEventsRepository
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.DataMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class EventsRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -17,29 +19,29 @@ class EventsRepository private constructor(
     private val appExecutors: AppExecutors
 ): IEventsRepository {
 
-    override fun getEvents(): LiveData<Resource<List<Events>>> =
+    override fun getEvents(): Flow<Resource<List<Events>>> =
         object : NetworkBoundResource<List<Events>, List<ListEventsItem>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Events>> {
-                return localDataSource.getEvents().map {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
-//                return localDataSource.getEvents()
+            override fun loadFromDB(): Flow<List<Events>> {
+//                return localDataSource.getEvents().map {
+//                    DataMapper.mapEntitiesToDomain(it)
+//                }
+                return localDataSource.getEvents().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Events>?): Boolean =
                 data == null || data.isEmpty()
 
-            override suspend fun createCall(): LiveData<ApiResponse<List<ListEventsItem>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<ListEventsItem>>> =
                 remoteDataSource.getEvents()
 
             override suspend fun saveCallResult(data: List<ListEventsItem>) {
                 val eventList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertEvent(eventList)
             }
-        }.asLiveData()
+        }.asFlow()
 
 
-    override fun getFavoriteEvent(): LiveData<List<Events>> {
+    override fun getFavoriteEvent(): Flow<List<Events>> {
         return localDataSource.getFavoriteEvent().map {
             DataMapper.mapEntitiesToDomain(it)
         }

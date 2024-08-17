@@ -7,17 +7,18 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EventDao {
     @Query("SELECT * FROM event ORDER BY id ASC")
-    fun getEvents(): LiveData<List<EventEntity>>
+    fun getEvents(): Flow<List<EventEntity>>
 
     @Query("SELECT * FROM event where isFavorite = 1")
-    fun getFavoriteEvent(): LiveData<List<EventEntity>>
+    fun getFavoriteEvent(): Flow<List<EventEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertEvent(event: List<EventEntity>)
+    suspend fun insertEvent(event: List<EventEntity>)
 
     @Update
     fun updateEvent(event: EventEntity)

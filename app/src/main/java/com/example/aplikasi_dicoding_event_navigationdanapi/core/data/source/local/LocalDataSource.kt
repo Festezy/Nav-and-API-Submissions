@@ -1,8 +1,8 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local
 
-import androidx.lifecycle.LiveData
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.entity.EventEntity
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.room.EventDao
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource private constructor(private val eventDao: EventDao) {
 
@@ -15,9 +15,9 @@ class LocalDataSource private constructor(private val eventDao: EventDao) {
             }
     }
 
-    fun getEvents(): LiveData<List<EventEntity>> = eventDao.getEvents()
+    fun getEvents(): Flow<List<EventEntity>> = eventDao.getEvents()
 
-    fun getFavoriteEvent(): LiveData<List<EventEntity>> = eventDao.getFavoriteEvent()
+    fun getFavoriteEvent(): Flow<List<EventEntity>> = eventDao.getFavoriteEvent()
 
     suspend fun insertEvent(eventList: List<EventEntity>) = eventDao.insertEvent(eventList)
 

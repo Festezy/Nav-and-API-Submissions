@@ -3,6 +3,7 @@ package com.example.aplikasi_dicoding_event_navigationdanapi.upcoming
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiConfig
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsUseCase
@@ -16,7 +17,7 @@ class UpcomingVIewModel(private val eventsUseCase: EventsUseCase) : ViewModel() 
 
     private val client = ApiConfig.getApiService()
 
-    fun getEvents() = eventsUseCase.getEvents()
+    fun getEvents() = eventsUseCase.getEvents().asLiveData()
 
     companion object {
         private const val TAG = "MainViewModel"

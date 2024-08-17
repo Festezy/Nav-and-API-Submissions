@@ -14,7 +14,7 @@ class FavoriteViewModel(private val eventsUseCase: EventsUseCase) : ViewModel() 
     private val _listFavoriteEvents = MutableLiveData<List<Events>>()
     val listFavoriteEvents: LiveData<List<Events>> = _listFavoriteEvents
 
-    private val favoriteEvents = eventsUseCase.getFavoriteEvent().asFlow()
+    private val favoriteEvents = eventsUseCase.getFavoriteEvent()
 
     fun getFavoriteEvents() =
         viewModelScope.launch {
