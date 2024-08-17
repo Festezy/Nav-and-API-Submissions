@@ -50,7 +50,7 @@ class EventsRepository private constructor(
 
     override fun setFavoriteEvent(events: Events, favoriteState: Boolean) {
         val eventsEntity = DataMapper.mapDomainToEntity(events)
-        appExecutors.diskIO.execute { localDataSource.setFavoriteEvent(eventsEntity, favoriteState) }
+        appExecutors.diskIO().execute { localDataSource.setFavoriteEvent(eventsEntity, favoriteState) }
     }
 
 
