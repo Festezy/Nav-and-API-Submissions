@@ -14,5 +14,5 @@ interface ApiService {
     ): EventResponse
 
     @GET("events/{id}")
-    fun getDetailEvent(@Path("id") id: String): Call<DetailEventResponse>
+    suspend fun getDetailEvent(@Path("id") id: String): DetailEventResponse
 }

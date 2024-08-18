@@ -4,22 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(private val eventsUseCase: EventsUseCase) : ViewModel() {
-    private val _listEventDetail = MutableLiveData<EventDetails>()
-    val listEventDetail: LiveData<EventDetails> = _listEventDetail
+    private val _listEventDetail = MutableLiveData<ApiResponse<EventDetails>>()
+    val listEventDetail: LiveData<ApiResponse<EventDetails>> = _listEventDetail
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
-
-//    private val client = ApiConfig.getApiService()
 
     fun saveFavorite(event: Events, newStatus: Boolean) {
         viewModelScope.launch {
@@ -27,27 +27,14 @@ class DetailsViewModel @Inject constructor(private val eventsUseCase: EventsUseC
         }
     }
 
-//    fun getDetailData(id: String) {
-//        _isLoading.value = true
-//        client.getDetailEvent(id).enqueue(object : Callback<DetailEventResponse> {
-//            override fun onResponse(
-//                call: Call<DetailEventResponse>,
-//                response: Response<DetailEventResponse>
-//            ) {
-//                if (response.isSuccessful) {
-//                    _isLoading.value = false
-//                    _listEventDetail.value = response.body()!!.event
-//                } else {
-//                    _isLoading.value = true
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<DetailEventResponse>, t: Throwable) {
-//                _isLoading.value = true
-//            }
-//
-//        })
-//    }
+    fun getEventDetail(id: String) {
+        viewModelScope.launch {
+            val getData = eventsUseCase.getDetailEvent(id)
+            getData.collectLatest { apiResponse ->
+                _listEventDetail.value = apiResponse
+            }
+        }
+    }
 
     companion object {
         private const val TAG = "DetailsViewModel"

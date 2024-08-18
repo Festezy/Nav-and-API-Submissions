@@ -1,6 +1,8 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase
 
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiResponse
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.repository.IEventsRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,6 +13,9 @@ class EventsInteractor @Inject constructor(private val eventsRepository: IEvents
     EventsUseCase {
     override fun getEvents(): Flow<Resource<List<Events>>> =
         eventsRepository.getEvents()
+
+    override fun getDetailEvent(id: String): Flow<ApiResponse<EventDetails>> =
+        eventsRepository.getDetailEvent(id)
 
     override fun getFavoriteEvent(): Flow<List<Events>> =
         eventsRepository.getFavoriteEvent()
