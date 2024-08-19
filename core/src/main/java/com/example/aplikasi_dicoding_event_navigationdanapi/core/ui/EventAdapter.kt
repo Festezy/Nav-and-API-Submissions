@@ -1,6 +1,5 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.ui
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,12 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
 import coil.size.Size
-import com.example.aplikasi_dicoding_event_navigationdanapi.R
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.R
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.databinding.ItemEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
-import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ItemEventBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
 
 class EventAdapter() : ListAdapter<Events, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    private lateinit var onItemClickCallback: OnItemClickCallback
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     class MyViewHolder(private val binding: ItemEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventItem: Events) {
@@ -27,13 +30,13 @@ class EventAdapter() : ListAdapter<Events, EventAdapter.MyViewHolder>(DIFF_CALLB
                 }
                 tvItemName.text = eventItem.name
 
-                root.setOnClickListener {
-                    Intent(root.context, DetailsActivity::class.java).also { intent ->
-                        intent.putExtra(DetailsActivity.EXTRA_ID, eventItem.id)
-                        intent.putExtra(DetailsActivity.EXTRA_DATA, eventItem)
-                        it.context.startActivity(intent)
-                    }
-                }
+//                root.setOnClickListener {
+//                    Intent(root.context, DetailsActivity::class.java).also { intent ->
+//                        intent.putExtra(DetailsActivity.EXTRA_ID, eventItem.id)
+//                        intent.putExtra(DetailsActivity.EXTRA_DATA, eventItem)
+//                        it.context.startActivity(intent)
+//                    }
+//                }
             }
         }
     }
@@ -46,6 +49,11 @@ class EventAdapter() : ListAdapter<Events, EventAdapter.MyViewHolder>(DIFF_CALLB
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val eventItem = getItem(position)
         holder.bind(eventItem)
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(getItem(holder.adapterPosition)) }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: Events)
     }
 
     companion object {

@@ -1,5 +1,6 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.upcoming
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentUpcomingBinding
+import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,6 +66,15 @@ class UpcomingFragment : Fragment() {
             rvEvent.layoutManager = LinearLayoutManager(requireActivity())
             rvEvent.adapter = adapter
         }
+        adapter.setOnItemClickCallback(object : EventAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Events) {
+                Intent(requireActivity(), DetailsActivity::class.java).also { intent ->
+                    intent.putExtra(DetailsActivity.EXTRA_ID, data.id)
+                    intent.putExtra(DetailsActivity.EXTRA_DATA, data)
+                    requireActivity().startActivity(intent)
+                }
+            }
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {

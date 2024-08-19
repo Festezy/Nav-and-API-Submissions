@@ -1,27 +1,22 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
     id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
-//    alias(libs.plugins.google.dagger.hilt.android)
-//    id("com.google.devtools.ksp")
 }
 //apply(from = "../shared_dependencies.gradle.kts")
 
 android {
-    namespace = "com.example.aplikasi_dicoding_event_navigationdanapi"
+    namespace = "com.example.aplikasi_dicoding_event_navigationdanapi.core"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.aplikasi_dicoding_event_navigationdanapi"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles("consumer-rules.pro")
         buildConfigField("String", "BASE_URL", "\"https://event-api.dicoding.dev/\"")
     }
 
@@ -41,15 +36,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
         buildConfig = true
     }
 }
 
 dependencies {
-    implementation(project(":core"))
 //    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -65,4 +60,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    api(libs.androidx.lifecycle.livedata.ktx)
+    api(libs.androidx.lifecycle.viewmodel.ktx)
 }

@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Aplikasi-Dicoding-Event-(Navigation dan API)"
 include(":app")
+include(":core")

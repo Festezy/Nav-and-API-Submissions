@@ -2,10 +2,8 @@ package com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.re
 
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.DetailEventResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventResponse
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface ApiService {
 

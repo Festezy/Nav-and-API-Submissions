@@ -1,6 +1,5 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

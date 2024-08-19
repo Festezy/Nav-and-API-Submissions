@@ -1,6 +1,6 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.di
 
-import com.example.aplikasi_dicoding_event_navigationdanapi.BuildConfig
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.BuildConfig
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiService
 import dagger.Module
 import dagger.Provides
