@@ -1,10 +1,11 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityMainBinding
-import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.FavoriteFragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventFragment
 import com.example.aplikasi_dicoding_event_navigationdanapi.upcoming.UpcomingFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +33,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.navigation_favorite_event -> {
-                    setCurrentFragment(FavoriteFragment())
+                    val uri = Uri.parse("dicodingevent://favorite")
+                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+//                    setCurrentFragment()
                     true
                 }
 

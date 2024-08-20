@@ -1,25 +1,34 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.favorite
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.aplikasi_dicoding_event_navigationdanapi.MyApplication
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.FragmentFavoriteBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.databinding.FragmentFavoriteBinding
+import javax.inject.Inject
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<FavoriteViewModel>()
+//    private val viewModel by viewModels<FavoriteViewModel>()
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val viewModel: FavoriteViewModel by viewModels {
+        factory
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,6 +36,12 @@ class FavoriteFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+//        Dagger
+//        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -6,4 +6,5 @@ plugins {
     alias(libs.plugins.google.devtools.ksp) apply false
     alias(libs.plugins.google.dagger.hilt.android) apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.android.dynamic.feature) apply false
 }
