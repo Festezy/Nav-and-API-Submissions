@@ -14,7 +14,9 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.MyApplication
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
 import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
+import com.example.aplikasi_dicoding_event_navigationdanapi.di.FavoriteModuleDependencies
 import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.databinding.FragmentFavoriteBinding
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 //@AndroidEntryPoint
@@ -22,7 +24,6 @@ class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
-//    private val viewModel by viewModels<FavoriteViewModel>()
     @Inject
     lateinit var factory: ViewModelFactory
 
@@ -40,7 +41,17 @@ class FavoriteFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        Dagger
+        DaggerFavoriteComponent.builder()
+            .context(requireActivity())
+            .appDependencies(
+                EntryPointAccessors.fromApplication(
+                    requireActivity(),
+                    FavoriteModuleDependencies::class.java
+                )
+            )
+            .build()
+            .inject(this)
+//        (requireActivity().application as MyApplication).appComponent.inject(this)
 //        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
 

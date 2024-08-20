@@ -61,6 +61,10 @@ dependencies {
     implementation(libs.coil)
 
     implementation(libs.dagger.hilt.android)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)

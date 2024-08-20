@@ -1,32 +1,21 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.favorite
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
-import com.example.aplikasi_dicoding_event_navigationdanapi.detail.DetailsActivity
+import androidx.fragment.app.Fragment
+import com.example.aplikasi_dicoding_event_navigationdanapi.MainActivity
 import com.example.aplikasi_dicoding_event_navigationdanapi.di.FavoriteModuleDependencies
 import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.databinding.ActivityFavoriteBinding
 import dagger.hilt.android.EntryPointAccessors
-import javax.inject.Inject
 
 //@AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
-
-    @Inject
-    lateinit var factory: ViewModelFactory
-
-    private val viewModel: FavoriteViewModel by viewModels {
-        factory
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerFavoriteComponent.builder()
@@ -49,44 +38,41 @@ class FavoriteActivity : AppCompatActivity() {
             insets
         }
 
-//        setCurrentFragment(FavoriteFragment())
-        showLoading(true)
-        viewModel.getFavoriteEvents()
-        viewModel.listFavoriteEvents.observe(this@FavoriteActivity) { favoriteEventList ->
-            setFavoriteEventData(favoriteEventList)
-        }
-        showLoading(false)
-    }
-
-    private fun setFavoriteEventData(eventData: List<Events>) {
-        val adapter = EventAdapter()
-        adapter.submitList(eventData)
-        binding.apply {
-            rvEvent.setHasFixedSize(true)
-            rvEvent.layoutManager = LinearLayoutManager(this@FavoriteActivity)
-            rvEvent.adapter = adapter
-        }
-        adapter.setOnItemClickCallback(object : EventAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: Events) {
-                Intent(this@FavoriteActivity, DetailsActivity::class.java).also { intent ->
-                    intent.putExtra(DetailsActivity.EXTRA_ID, data.id)
-                    intent.putExtra(DetailsActivity.EXTRA_DATA, data)
-                    this@FavoriteActivity.startActivity(intent)
-                }
-            }
-        })
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        binding.apply {
-            if (isLoading) progressBar.visibility = View.VISIBLE
-            else progressBar.visibility = View.GONE
-        }
-    }
-//    private fun setCurrentFragment(fragment: Fragment) {
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(R.id.nav_host_fragment, fragment)
-//            commit()
+        setCurrentFragment(FavoriteFragment())
+//        binding.bottomNavigation.setOnItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.navigation_event -> {
+//                    Intent(this@FavoriteActivity, MainActivity::class.java).also {
+//                        this@FavoriteActivity.startActivity(it)
+//                    }
+////                    setCurrentFragment(UpcomingFragment())
+//                    true
+//                }
+//
+//                R.id.navigation_finish_event -> {
+//                    Intent(this@FavoriteActivity, MainActivity::class.java).also {
+//                        this@FavoriteActivity.startActivity(it)
+//                    }
+////                    setCurrentFragment(FinishEventFragment())
+//                    true
+//                }
+//
+//                R.id.navigation_favorite_event -> {
+//                    val uri = Uri.parse("dicodingevent://favorite")
+//                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+////                    setCurrentFragment()
+//                    true
+//                }
+//
+//                else -> false
+//            }
 //        }
-//    }
+    }
+
+    private fun setCurrentFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.nav_host_fragment, fragment)
+            commit()
+        }
+    }
 }
