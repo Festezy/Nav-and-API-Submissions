@@ -75,7 +75,6 @@ class FavoriteFragment : Fragment() {
         adapter.setOnItemClickCallback(object : EventAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Events) {
                 Intent(requireActivity(), DetailsActivity::class.java).also { intent ->
-                    intent.putExtra(DetailsActivity.EXTRA_ID, data.id)
                     intent.putExtra(DetailsActivity.EXTRA_DATA, data)
                     requireActivity().startActivity(intent)
                 }
