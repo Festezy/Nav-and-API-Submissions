@@ -26,9 +26,6 @@ class EventsRepository @Inject constructor(
     override fun getEvents(): Flow<Resource<List<Events>>> =
         object : NetworkBoundResource<List<Events>, List<ListEventsItem>>(appExecutors) {
             override fun loadFromDB(): Flow<List<Events>> {
-//                return localDataSource.getEvents().map {
-//                    DataMapper.mapEntitiesToDomain(it)
-//                }
                 return localDataSource.getEvents().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
@@ -43,6 +40,18 @@ class EventsRepository @Inject constructor(
                 localDataSource.insertEvent(eventList)
             }
         }.asFlow()
+
+    override fun getUpcomingEvents(): Flow<List<Events>> {
+        return localDataSource.getUpcomingEvents().map {
+            DataMapper.mapEntitiesToDomain(it)
+        }
+    }
+
+    override fun getFinishedEvents(): Flow<List<Events>> {
+        return localDataSource.getFinishedEvents().map {
+            DataMapper.mapEntitiesToDomain(it)
+        }
+    }
 
     override fun getDetailEvent(id: String): Flow<ApiResponse<EventDetails>> {
         return flow {
@@ -60,7 +69,6 @@ class EventsRepository @Inject constructor(
         return localDataSource.getFavoriteEvent().map {
             DataMapper.mapEntitiesToDomain(it)
         }
-//        return localDataSource.getFavoriteEvent()
     }
 
     override fun setFavoriteEvent(events: Events, favoriteState: Boolean) {

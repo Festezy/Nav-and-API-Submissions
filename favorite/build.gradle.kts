@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.google.devtools.ksp)
     id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
+
 }
 android {
     namespace = "com.example.aplikasi_dicoding_event_navigationdanapi.favorite"
@@ -50,6 +51,8 @@ dependencies {
     implementation(libs.coil)
 
     implementation(libs.dagger.hilt.android)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     ksp(libs.dagger.hilt.android.compiler)
 //    implementation(libs.dagger)
 //    ksp(libs.dagger.compiler)

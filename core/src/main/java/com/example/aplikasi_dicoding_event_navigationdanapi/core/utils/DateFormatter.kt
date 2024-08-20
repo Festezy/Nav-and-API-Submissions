@@ -3,7 +3,8 @@ package com.example.aplikasi_dicoding_event_navigationdanapi.core.utils
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.TimeZone
 
 object DateFormatter {
     fun formatDate(currentDate: String): String? {

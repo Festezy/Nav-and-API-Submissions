@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
@@ -49,12 +51,13 @@ class UpcomingFragment : Fragment() {
 
                     is Resource.Success -> {
                         showLoading(false)
-                        val eventData = apiResult.data
-                        setEventData(eventData)
                     }
                 }
             }
 
+        }
+        viewModel.listEventItem.observe(viewLifecycleOwner) { result ->
+            setEventData(result)
         }
     }
 
@@ -65,7 +68,10 @@ class UpcomingFragment : Fragment() {
             rvEvent.setHasFixedSize(true)
             rvEvent.layoutManager = LinearLayoutManager(requireActivity())
             rvEvent.adapter = adapter
+
+            checkIfEmpty(rvEvent, emptyView)
         }
+
         adapter.setOnItemClickCallback(object : EventAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Events) {
                 Intent(requireActivity(), DetailsActivity::class.java).also { intent ->
@@ -75,6 +81,19 @@ class UpcomingFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun checkIfEmpty(recyclerView: RecyclerView, emptyView: TextView) {
+        val adapter = recyclerView.adapter
+        if (adapter != null) {
+            if (adapter.itemCount == 0) {
+                recyclerView.visibility = View.GONE
+                emptyView.visibility = View.VISIBLE
+            } else {
+                recyclerView.visibility = View.VISIBLE
+                emptyView.visibility = View.GONE
+            }
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {

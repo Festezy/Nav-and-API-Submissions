@@ -9,7 +9,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FavoriteViewModel(private val eventsUseCase: EventsUseCase) :
+class FavoriteViewModel(eventsUseCase: EventsUseCase) :
     ViewModel() {
     private val _listFavoriteEvents = MutableLiveData<List<Events>>()
     val listFavoriteEvents: LiveData<List<Events>> = _listFavoriteEvents

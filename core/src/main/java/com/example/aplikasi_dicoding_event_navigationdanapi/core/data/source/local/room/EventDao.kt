@@ -16,6 +16,12 @@ interface EventDao {
     @Query("SELECT * FROM event where isFavorite = 1")
     fun getFavoriteEvent(): Flow<List<EventEntity>>
 
+    @Query("SELECT * FROM event where isExpired = 0")
+    fun getUpcomingEvents(): Flow<List<EventEntity>>
+
+    @Query("SELECT * FROM event where isExpired = 1")
+    fun getFinishedEvents(): Flow<List<EventEntity>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertEvent(event: List<EventEntity>)
 

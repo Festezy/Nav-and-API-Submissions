@@ -8,8 +8,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface IEventsRepository {
     fun getEvents(): Flow<Resource<List<Events>>>
-
     fun getDetailEvent(id: String): Flow<ApiResponse<EventDetails>>
     fun getFavoriteEvent(): Flow<List<Events>>
+    fun getUpcomingEvents(): Flow<List<Events>>
+    fun getFinishedEvents(): Flow<List<Events>>
     fun setFavoriteEvent(events: Events, favoriteState: Boolean)
 }

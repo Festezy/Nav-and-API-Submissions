@@ -18,4 +18,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="empty_item_upcoming">There is no upcoming event for now, Check finished event</string>
+    <string name="empty_item_finished">There is no upcoming event for now, Check finished event</string>
 </resources>

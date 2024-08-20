@@ -35,18 +35,6 @@ class FinishEventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val viewModel = ViewModelProvider(
-//            requireActivity(),
-//            ViewModelProvider.NewInstanceFactory()
-//        )[FinishEventViewModel::class.java]
-//        viewModel.getFinishedEventList("0")
-//        viewModel.listEventItem.observe(viewLifecycleOwner) { item ->
-//            setEventData(item)
-//        }
-//        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-//            showLoading(isLoading)
-//        }
-
         viewModel.getEvents().observe(viewLifecycleOwner) { apiResult ->
             if (apiResult != null) {
                 when (apiResult) {
@@ -61,10 +49,12 @@ class FinishEventFragment : Fragment() {
 
                     is Resource.Success -> {
                         showLoading(false)
-                        val eventData = apiResult.data
-                        setEventData(eventData)
                     }
                 }
+            }
+
+            viewModel.listEventItem.observe(viewLifecycleOwner) { result ->
+                setEventData(result)
             }
         }
 

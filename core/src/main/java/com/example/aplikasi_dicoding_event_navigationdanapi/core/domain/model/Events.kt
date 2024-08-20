@@ -11,5 +11,7 @@ data class Events(
 
     var mediaCover: String? = null,
 
+    var isExpired: Boolean,
+
     var isFavorite: Boolean
 ) : Parcelable

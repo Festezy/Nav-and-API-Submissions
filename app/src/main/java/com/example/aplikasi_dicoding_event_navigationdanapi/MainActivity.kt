@@ -1,5 +1,7 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -28,43 +30,31 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_upcoming,
                 R.id.navigation_finished
-//                R.id.navigation_favorite_event
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-//        setCurrentFragment(UpcomingFragment())
-//
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_event -> {
                     navController.navigate(R.id.navigation_upcoming)
-//                    setCurrentFragment(UpcomingFragment())
                     true
                 }
 
                 R.id.navigation_finish_event -> {
                     navController.navigate(R.id.navigation_finished)
-//                    setCurrentFragment(FinishEventFragment())
                     true
                 }
 
-//                R.id.navigation_favorite_event -> {
-//                    val uri = Uri.parse("dicodingevent://favorite")
-//                    startActivity(Intent(Intent.ACTION_VIEW, uri))
-////                    setCurrentFragment()
-//                    true
-//                }
+                R.id.navigation_favorite_event -> {
+                    val uri = Uri.parse("dicodingevent://favorite")
+                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+                    true
+                }
 
                 else -> false
             }
         }
     }
 
-//    private fun setCurrentFragment(fragment: Fragment) {
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(R.id.nav_host_fragment, fragment)
-//            commit()
-//        }
-//    }
 }

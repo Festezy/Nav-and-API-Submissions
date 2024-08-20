@@ -12,7 +12,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.databinding.ItemEventBinding
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 
-class EventAdapter() : ListAdapter<Events, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class EventAdapter : ListAdapter<Events, EventAdapter.MyViewHolder>(DIFF_CALLBACK) {
     private lateinit var onItemClickCallback: OnItemClickCallback
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback

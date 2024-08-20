@@ -11,7 +11,6 @@ activity = "1.9.1"
 constraintlayout = "2.1.4"
 retrofit = "2.11.0"
 converterGson = "2.11.0"
-loggingInterceptor = "5.0.0-alpha.14"
 coil = "2.7.0"
 lifecycleLivedataKtx = "2.8.4"
 lifecycleViewmodelKtx = "2.8.4"
@@ -19,13 +18,9 @@ roomCompiler = "2.6.1"
 ksp = "1.9.0-1.0.13"
 roomKtx = "2.6.1"
 fragmentKtx = "1.8.2"
-lifecycleLivedata = "2.8.4"
 kotlinxCoroutinesAndroid = "1.9.0-RC.2"
 kotlinxCoroutinesCore = "1.9.0-RC.2"
 hiltAndroid = "2.48"
-hiltAndroidGradlePlugin = "2.52"
-hiltAndroidVersion = "2.52"
-hiltAndroidCompiler = "2.52"
 dagger = "2.48"
 daggerCompiler = "2.48"
 navigationFragmentKtx = "2.7.7"
@@ -50,12 +45,8 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
-androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "lifecycleLivedata" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version = "hiltAndroid" }
-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version = "hiltAndroid" }
-hilt-android-gradle-plugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hiltAndroid" }
 dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
 dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltAndroid" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }

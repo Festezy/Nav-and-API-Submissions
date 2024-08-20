@@ -20,6 +20,12 @@ class EventsInteractor @Inject constructor(private val eventsRepository: IEvents
     override fun getFavoriteEvent(): Flow<List<Events>> =
         eventsRepository.getFavoriteEvent()
 
+    override fun getUpcomingEvents(): Flow<List<Events>> =
+        eventsRepository.getUpcomingEvents()
+
+    override fun getFinishedEvents(): Flow<List<Events>> =
+        eventsRepository.getFinishedEvents()
+
     override fun setFavoriteEvent(events: Events, favoriteState: Boolean) =
         eventsRepository.setFavoriteEvent(events, favoriteState)
 }

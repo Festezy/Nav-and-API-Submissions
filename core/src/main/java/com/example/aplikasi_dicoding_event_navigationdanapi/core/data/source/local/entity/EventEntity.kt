@@ -19,6 +19,9 @@ data class EventEntity(
     @field:ColumnInfo(name = "mediaCover")
     var mediaCover: String? = null,
 
+    @field:ColumnInfo(name = "isExpired")
+    var isExpired: Boolean,
+
     @field:ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean
 ): Parcelable

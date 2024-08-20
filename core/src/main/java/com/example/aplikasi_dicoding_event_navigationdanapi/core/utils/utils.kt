@@ -6,8 +6,11 @@ import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.text.HtmlCompat
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun convertStringToFormattedString(inputString: String): String {
@@ -16,6 +19,19 @@ fun convertStringToFormattedString(inputString: String): String {
 
     val localDateTime = LocalDateTime.parse(inputString, inputFormatter)
     return localDateTime.format(outputFormatter)
+}
+
+fun isDatePassed(dateString: String): Boolean {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    dateFormat.isLenient = false
+
+    try {
+        val inputDate = dateFormat.parse(dateString) ?: return false
+        val currentDate = Date()
+        return inputDate.before(currentDate)
+    } catch (e: Exception) {
+        return false
+    }
 }
 
 fun convertHtmlToFormattedString(inputHtml: String): String{

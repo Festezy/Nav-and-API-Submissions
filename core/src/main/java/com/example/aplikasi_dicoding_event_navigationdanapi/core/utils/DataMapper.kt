@@ -12,6 +12,7 @@ object DataMapper {
                 id = it.id.toString(),
                 name = it.name!!,
                 mediaCover = it.mediaCover,
+                isExpired = isDatePassed(it.endTime.toString()),
                 isFavorite = false
             )
             eventList.add(event)
@@ -25,6 +26,7 @@ object DataMapper {
                 id = it.id,
                 name = it.name,
                 mediaCover = it.mediaCover,
+                isExpired = it.isExpired,
                 isFavorite = it.isFavorite
             )
         }
@@ -32,6 +34,7 @@ object DataMapper {
         id = input.id,
         name = input.name,
         mediaCover = input.mediaCover,
+        isExpired = input.isExpired,
         isFavorite = input.isFavorite
     )
 }

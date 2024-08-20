@@ -5,7 +5,6 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 

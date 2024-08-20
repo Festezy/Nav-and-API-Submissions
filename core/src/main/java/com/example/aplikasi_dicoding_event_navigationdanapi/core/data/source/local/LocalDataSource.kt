@@ -14,6 +14,9 @@ class LocalDataSource @Inject constructor(private val eventDao: EventDao) {
 
     fun getFavoriteEvent(): Flow<List<EventEntity>> = eventDao.getFavoriteEvent()
 
+    fun getUpcomingEvents(): Flow<List<EventEntity>> = eventDao.getUpcomingEvents()
+    fun getFinishedEvents(): Flow<List<EventEntity>> = eventDao.getFinishedEvents()
+
     suspend fun insertEvent(eventList: List<EventEntity>) = eventDao.insertEvent(eventList)
 
     fun setFavoriteEvent(event: EventEntity, newState: Boolean) {
