@@ -6,12 +6,19 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Events(
     var id: String = "",
-
-    var name: String = "",
-
-    var mediaCover: String? = null,
-
+    val name: String? = null,
+    val mediaCover: String? = null,
+    val registrants: Int? = null,
+    val summary: String? = null,
+    val imageLogo: String? = null,
+    val link: String? = null,
+    val description: String? = null,
+    val ownerName: String? = null,
+    val cityName: String? = null,
+    val quota: Int? = null,
+    val beginTime: String? = null,
+    val endTime: String? = null,
+    val category: String? = null,
     var isExpired: Boolean,
-
     var isFavorite: Boolean
 ) : Parcelable

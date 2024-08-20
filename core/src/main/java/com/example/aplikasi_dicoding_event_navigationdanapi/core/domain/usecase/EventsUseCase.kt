@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 interface EventsUseCase {
     fun getEvents(): Flow<Resource<List<Events>>>
 
-    fun getDetailEvent(id: String): Flow<ApiResponse<EventDetails>>
     fun getFavoriteEvent(): Flow<List<Events>>
 
     fun getUpcomingEvents(): Flow<List<Events>>

@@ -35,6 +35,10 @@ class FinishEventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViewModel()
+    }
+
+    private fun initViewModel() {
         viewModel.getEvents().observe(viewLifecycleOwner) { apiResult ->
             if (apiResult != null) {
                 when (apiResult) {
@@ -54,13 +58,12 @@ class FinishEventFragment : Fragment() {
             }
 
             viewModel.listEventItem.observe(viewLifecycleOwner) { result ->
-                setEventData(result)
+                setEventDataRecyclerView(result)
             }
         }
-
     }
 
-    private fun setEventData(consumerReviews: List<Events>) {
+    private fun setEventDataRecyclerView(consumerReviews: List<Events>) {
         val adapter = EventAdapter()
         adapter.submitList(consumerReviews)
         binding.apply {
@@ -73,7 +76,6 @@ class FinishEventFragment : Fragment() {
         adapter.setOnItemClickCallback(object : EventAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Events) {
                 Intent(requireActivity(), DetailsActivity::class.java).also { intent ->
-                    intent.putExtra(DetailsActivity.EXTRA_ID, data.id)
                     intent.putExtra(DetailsActivity.EXTRA_DATA, data)
                     requireActivity().startActivity(intent)
                 }

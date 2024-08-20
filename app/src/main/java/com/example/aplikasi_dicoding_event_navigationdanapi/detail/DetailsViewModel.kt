@@ -15,11 +15,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(private val eventsUseCase: EventsUseCase) : ViewModel() {
-    private val _listEventDetail = MutableLiveData<ApiResponse<EventDetails>>()
-    val listEventDetail: LiveData<ApiResponse<EventDetails>> = _listEventDetail
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
 
     fun saveFavorite(event: Events, newStatus: Boolean) {
         viewModelScope.launch {
@@ -27,14 +22,6 @@ class DetailsViewModel @Inject constructor(private val eventsUseCase: EventsUseC
         }
     }
 
-    fun getEventDetail(id: String) {
-        viewModelScope.launch {
-            val getData = eventsUseCase.getDetailEvent(id)
-            getData.collectLatest { apiResponse ->
-                _listEventDetail.value = apiResponse
-            }
-        }
-    }
 
     companion object {
         private const val TAG = "DetailsViewModel"

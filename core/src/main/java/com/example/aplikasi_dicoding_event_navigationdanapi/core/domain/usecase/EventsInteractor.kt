@@ -14,9 +14,6 @@ class EventsInteractor @Inject constructor(private val eventsRepository: IEvents
     override fun getEvents(): Flow<Resource<List<Events>>> =
         eventsRepository.getEvents()
 
-    override fun getDetailEvent(id: String): Flow<ApiResponse<EventDetails>> =
-        eventsRepository.getDetailEvent(id)
-
     override fun getFavoriteEvent(): Flow<List<Events>> =
         eventsRepository.getFavoriteEvent()
 

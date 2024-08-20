@@ -11,6 +11,6 @@ interface ApiService {
     suspend fun getEvent(
     ): EventResponse
 
-    @GET("events/{id}")
-    suspend fun getDetailEvent(@Path("id") id: String): DetailEventResponse
+//    @GET("events/{id}")
+//    suspend fun getDetailEvent(@Path("id") id: String): DetailEventResponse
 }

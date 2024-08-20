@@ -33,24 +33,5 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getDetailEvent(id: String): Flow<ApiResponse<EventDetails>> {
-        //get data from remote api
-        return flow {
-            emit(ApiResponse.Empty)
-            try {
-                val response = apiService.getDetailEvent(id)
-                val dataArray = response.event
-                if (dataArray != null) {
-                    emit(ApiResponse.Success(dataArray))
-                } else {
-                    emit(ApiResponse.Empty)
-                }
-            } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
-                Log.e("RemoteDataSource", e.toString())
-            }
-        }.flowOn(Dispatchers.IO)
-    }
-
 }
 

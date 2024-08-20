@@ -1,9 +1,7 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import coil.load
 import com.example.aplikasi_dicoding_event_navigationdanapi.R
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertHtmlToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedString
@@ -37,51 +34,35 @@ class DetailsActivity : AppCompatActivity() {
             insets
         }
 
+        showLoading(true)
         // data From intent
-        val eventId = intent.getStringExtra(EXTRA_ID)
-        val eventEntity = intent.getParcelableExtra<Events>(EXTRA_DATA)
-        eventId.let { id ->
-            viewModel.getEventDetail(id!!)
+        val eventDetail = intent.getParcelableExtra<Events>(EXTRA_DATA)
+        eventDetail.let { result ->
+            getFavoriteData(result)
+            initView(result!!)
         }
-        getFavoriteData(eventEntity)
+        showLoading(false)
+    }
 
-        viewModel.listEventDetail.observe(this@DetailsActivity) { result ->
-            when (result) {
-                is ApiResponse.Empty -> showLoading(true)
-                is ApiResponse.Error -> {
-                    showLoading(false)
-                    showToast(result.errorMessage)
-                    Log.d(TAG, "Error Message: ${result.errorMessage}")
-                }
+    private fun initView(result: Events){
+        binding.apply {
+            eventImage.load(result.mediaCover)
+            eventCategory.text = result.category
+            eventTitle.text = result.name
+            eventOrganizer.text = result.ownerName
+            eventDescriptions.text =
+                result.description?.let { convertHtmlToFormattedString(it) }
 
-                is ApiResponse.Success -> {
-                    showLoading(false)
-                    binding.apply {
-                        eventImage.load(result.data.mediaCover)
-                        eventCategory.text = result.data.category
-                        eventTitle.text = result.data.name
-                        eventOrganizer.text = result.data.ownerName
-                        eventDescriptions.text =
-                            result.data.description?.let { convertHtmlToFormattedString(it) }
+            eventExpired.text =
+                result.endTime?.let { convertStringToFormattedString(it) }
+            eventQuota.text = result.quota.toString()
 
-                        eventExpired.text =
-                            result.data.endTime?.let { convertStringToFormattedString(it) }
-                        eventQuota.text = result.data.quota.toString()
-
-                        eventRegisterButton.setOnClickListener {
-                            gotoUrl(
-                                this@DetailsActivity,
-                                result.data.link
-                            )
-                        }
-                    }
-                }
+            eventRegisterButton.setOnClickListener {
+                gotoUrl(
+                    this@DetailsActivity,
+                    result.link
+                )
             }
-
-        }
-
-        viewModel.isLoading.observe(this) { isLoading ->
-            showLoading(isLoading)
         }
     }
 
@@ -127,14 +108,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun showToast(message: String) {
-        Toast.makeText(this@DetailsActivity, message, Toast.LENGTH_SHORT).show()
-    }
-
     companion object {
-        private const val TAG = "DetailsActivity"
-        const val EXTRA_ID = "extra_id"
         const val EXTRA_DATA = "extra_data"
     }
 }
