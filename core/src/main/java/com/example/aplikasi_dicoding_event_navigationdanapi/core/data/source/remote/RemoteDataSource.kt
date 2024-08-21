@@ -3,7 +3,6 @@ package com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.re
 import android.util.Log
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiResponse
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiService
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.ListEventsItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

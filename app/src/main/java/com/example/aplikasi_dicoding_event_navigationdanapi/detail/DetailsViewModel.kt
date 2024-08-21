@@ -22,8 +22,4 @@ class DetailsViewModel @Inject constructor(private val eventsUseCase: EventsUseC
         }
     }
 
-
-    companion object {
-        private const val TAG = "DetailsViewModel"
-    }
 }

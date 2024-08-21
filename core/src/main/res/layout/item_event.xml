@@ -17,6 +17,7 @@
             android:id="@+id/img_item_photo"
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:contentDescription="@string/title_event_cover_image"
             android:scaleType="fitXY"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"

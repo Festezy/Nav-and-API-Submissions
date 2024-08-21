@@ -10,7 +10,6 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.di.FavoriteModuleDep
 import com.example.aplikasi_dicoding_event_navigationdanapi.favorite.databinding.ActivityFavoriteBinding
 import dagger.hilt.android.EntryPointAccessors
 
-//@AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
 
