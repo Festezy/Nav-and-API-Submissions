@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="empty_item_favorite">No Event is set as favorite, go to event section</string>
+</resources>
