@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_favorite_event -> {
                     val uri = Uri.parse("dicodingevent://favorite")
-                    startActivity(Intent(Intent.ACTION_VIEW, uri))
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+//                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
                     true
                 }
 
