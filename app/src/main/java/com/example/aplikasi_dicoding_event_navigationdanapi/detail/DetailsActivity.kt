@@ -39,28 +39,28 @@ class DetailsActivity : AppCompatActivity() {
         val eventDetail = intent.getParcelableExtra<Events>(EXTRA_DATA)
         eventDetail.let { result ->
             getFavoriteData(result)
-            initView(result!!)
+            initView(result)
         }
         showLoading(false)
     }
 
-    private fun initView(result: Events){
+    private fun initView(result: Events?){
         binding.apply {
-            eventImage.load(result.mediaCover)
-            eventCategory.text = result.category
-            eventTitle.text = result.name
-            eventOrganizer.text = result.ownerName
+            eventImage.load(result?.mediaCover)
+            eventCategory.text = result?.category
+            eventTitle.text = result?.name
+            eventOrganizer.text = result?.ownerName
             eventDescriptions.text =
-                result.description?.let { convertHtmlToFormattedString(it) }
+                result?.description?.let { convertHtmlToFormattedString(it) }
 
             eventExpired.text =
-                result.endTime?.let { convertStringToFormattedString(it) }
-            eventQuota.text = result.quota.toString()
+                result?.endTime?.let { convertStringToFormattedString(it) }
+            eventQuota.text = result?.quota.toString()
 
             eventRegisterButton.setOnClickListener {
                 gotoUrl(
                     this@DetailsActivity,
-                    result.link
+                    result?.link
                 )
             }
         }

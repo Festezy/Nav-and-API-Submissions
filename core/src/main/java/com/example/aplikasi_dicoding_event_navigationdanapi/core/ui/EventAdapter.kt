@@ -29,14 +29,6 @@ class EventAdapter : ListAdapter<Events, EventAdapter.MyViewHolder>(DIFF_CALLBAC
                     Scale.FILL
                 }
                 tvItemName.text = eventItem.name
-
-//                root.setOnClickListener {
-//                    Intent(root.context, DetailsActivity::class.java).also { intent ->
-//                        intent.putExtra(DetailsActivity.EXTRA_ID, eventItem.id)
-//                        intent.putExtra(DetailsActivity.EXTRA_DATA, eventItem)
-//                        it.context.startActivity(intent)
-//                    }
-//                }
             }
         }
     }

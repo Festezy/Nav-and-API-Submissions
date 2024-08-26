@@ -1,3 +1,4 @@
 <resources>
     <string name="event_name">Event Name</string>
+    <string name="title_event_cover_image">Event Cover Image</string>
 </resources>

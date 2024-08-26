@@ -1,8 +1,6 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase
 
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiResponse
-import com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.EventDetails
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import kotlinx.coroutines.flow.Flow
 
