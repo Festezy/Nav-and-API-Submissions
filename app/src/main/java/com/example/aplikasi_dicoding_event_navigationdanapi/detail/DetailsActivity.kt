@@ -1,5 +1,6 @@
 package com.example.aplikasi_dicoding_event_navigationdanapi.detail
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +14,7 @@ import com.example.aplikasi_dicoding_event_navigationdanapi.R
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertHtmlToFormattedString
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedString
+import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.convertStringToFormattedStringAPPi24
 import com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.gotoUrl
 import com.example.aplikasi_dicoding_event_navigationdanapi.databinding.ActivityDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +46,7 @@ class DetailsActivity : AppCompatActivity() {
         showLoading(false)
     }
 
-    private fun initView(result: Events?){
+    private fun initView(result: Events?) {
         binding.apply {
             eventImage.load(result?.mediaCover)
             eventCategory.text = result?.category
@@ -54,7 +56,13 @@ class DetailsActivity : AppCompatActivity() {
                 result?.description?.let { convertHtmlToFormattedString(it) }
 
             eventExpired.text =
-                result?.endTime?.let { convertStringToFormattedString(it) }
+                result?.endTime?.let {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        convertStringToFormattedString(it)
+                    } else {
+                        convertStringToFormattedStringAPPi24(it)
+                    }
+                }
             eventQuota.text = result?.quota.toString()
 
             eventRegisterButton.setOnClickListener {

@@ -17,6 +17,7 @@
         tools:layout="@layout/fragment_finish_event" />
 
 
+    <!--suppress AndroidDomInspection -->
     <fragment
         android:id="@+id/navigation_favorite_event"
         android:name="com.example.aplikasi_dicoding_event_navigationdanapi.favorite.FavoriteFragment"

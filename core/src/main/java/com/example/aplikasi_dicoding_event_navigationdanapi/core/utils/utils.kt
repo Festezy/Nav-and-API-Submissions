@@ -21,6 +21,14 @@ fun convertStringToFormattedString(inputString: String): String {
     return localDateTime.format(outputFormatter)
 }
 
+fun convertStringToFormattedStringAPPi24(inputString: String): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("MMM  d, yyyy", Locale.getDefault())
+
+        val date = inputFormat.parse(inputString)
+    return outputFormat.format(date)
+}
+
 fun isDatePassed(dateString: String): Boolean {
     val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     dateFormat.isLenient = false
