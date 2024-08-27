@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.aplikasi_dicoding_event_navigationdanapi"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
