@@ -16,19 +16,11 @@
         android:label="@string/title_finish_event"
         tools:layout="@layout/fragment_finish_event" />
 
-<!--    <include app:graph="@navigation/feature_navigation"-->
-<!--        android:graphPackage="com.example.aplikasi_dicoding_event_navigationdanapi.favorite" />-->
-<!--    <include-->
-<!--        app:graph="@navigation/mobile_navigation"-->
-<!--        android:graphPackage="com.example.aplikasi_dicoding_event_navigationdanapi.favorite" />-->
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_favorite"-->
-<!--        android:label="@string/title_favorite"-->
-<!--        tools:layout="@layout/fragment_favorite" />-->
+    <fragment
+        android:id="@+id/navigation_favorite_event"
+        android:name="com.example.aplikasi_dicoding_event_navigationdanapi.favorite.FavoriteFragment"
+        android:label="@string/title_favorite"
+        tools:layout="@layout/fragment_favorite" />
 
-    <!--    <fragment-->
-<!--        android:id="@+id/finishEventFragment"-->
-<!--        android:name="com.example.aplikasi_dicoding_event_navigationdanapi.finish.FinishEventFragment"-->
-<!--        android:label="FinishEventFragment" />-->
 </navigation>
