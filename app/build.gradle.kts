@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.leakcanary.android)
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)

@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.coil)
 
     implementation(libs.dagger.hilt.android)
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.sqlite.ktx)
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
