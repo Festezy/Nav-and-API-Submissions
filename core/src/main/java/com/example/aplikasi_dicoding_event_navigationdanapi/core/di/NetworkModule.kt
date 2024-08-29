@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,10 +18,17 @@ import java.util.concurrent.TimeUnit
 class NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
+        val hostname = BuildConfig.API_HOSTNAME
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostname, "sha256/3WZbkG3xHWVAC4IOdubeuxN4pusOQKNHp7Kh21dAX00=")
+            .add(hostname, "sha256/K7rZOrXHknnsEhUH8nLL4MZkejquUuIvOIr6tCa0rbo=")
+            .add(hostname, "sha256/vMLWq5laN2APKogi0OTlnmB3SCPI8yNCQ9AO3D9I7Nc=")
+            .build()
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
 

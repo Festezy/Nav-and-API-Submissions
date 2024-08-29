@@ -18,6 +18,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
         buildConfigField("String", "BASE_URL", "\"https://event-api.dicoding.dev/\"")
+        buildConfigField("String", "API_HOSTNAME", "\"event-api.dicoding.dev\"")
     }
 
     buildTypes {
