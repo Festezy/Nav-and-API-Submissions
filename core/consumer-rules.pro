@@ -62,6 +62,9 @@
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface <1>
 
+-keep class com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.** { *; }
+
+
 -dontwarn kotlinx.**
 
 # This is generated automatically by the Android Gradle plugin.

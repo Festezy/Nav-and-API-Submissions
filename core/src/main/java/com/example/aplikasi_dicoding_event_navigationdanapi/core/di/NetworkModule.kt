@@ -20,9 +20,9 @@ class NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         val hostname = BuildConfig.API_HOSTNAME
         val certificatePinner = CertificatePinner.Builder()
-            .add(hostname, "sha256/3WZbkG3xHWVAC4IOdubeuxN4pusOQKNHp7Kh21dAX00=")
-            .add(hostname, "sha256/K7rZOrXHknnsEhUH8nLL4MZkejquUuIvOIr6tCa0rbo=")
-            .add(hostname, "sha256/vMLWq5laN2APKogi0OTlnmB3SCPI8yNCQ9AO3D9I7Nc=")
+            .add(hostname, "sha256/JmxQVFIXEBAlYQhMkj7Q3m0vm+sF05vaCNkyjLCcOT4=")
+            .add(hostname, "sha256/bdrBhpj38ffhxpubzkINl0rG+UyossdhcBYj+Zx2fcc=")
+            .add(hostname, "sha256/C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=")
             .build()
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
