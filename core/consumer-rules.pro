@@ -2,7 +2,6 @@
 -keep,includedescriptorclasses class net.sqlcipher.** { *; }
 -keep,includedescriptorclasses interface net.sqlcipher.** { *; }
 
-
 ##---------------Begin: proguard configuration for Gson ----------
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
@@ -64,8 +63,31 @@
 
 -keep class com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.response.** { *; }
 
-
 -dontwarn kotlinx.**
 
 # This is generated automatically by the Android Gradle plugin.
--dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.**
+#-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.**
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource$Error
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource$Loading
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource$Success
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.LocalDataSource
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.room.EventDao
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.RemoteDataSource
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiService
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.di.DatabaseModule
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.di.DatabaseModule_ProvideDatabaseFactory
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.di.DatabaseModule_ProvideTourismDaoFactory
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.di.NetworkModule
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.di.NetworkModule_ProvideApiServiceFactory
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.di.NetworkModule_ProvideOkHttpClientFactory
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.model.Events
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.repository.IEventsRepository
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsInteractor
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.domain.usecase.EventsUseCase
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter$OnItemClickCallback
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
+-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.UtilsKt
+

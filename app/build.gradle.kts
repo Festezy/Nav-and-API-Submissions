@@ -33,7 +33,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-
         debug {
             isMinifyEnabled = true
             proguardFiles(
