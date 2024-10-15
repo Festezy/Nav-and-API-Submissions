@@ -30,6 +30,18 @@
 }
 
 
+# Keep Gson models (in case you're using custom TypeAdapters or Gson serialization)
+-keep class com.google.gson.** { *; }
+
+# Prevent obfuscation of Kotlin data classes (used in Gson serialization)
+-keep class **Kt { *; }
+
+# Keep Kotlin Metadata (important for reflection in Kotlin)
+-keepattributes KotlinMetadata
+
+# Prevent warnings for Gson and OkHttp (adjust as needed)
+-dontwarn com.google.gson.*
+
 ##---------------Begin: proguard configuration for Retrofit ----------
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
 # EnclosingMethod is required to use InnerClasses.
@@ -42,6 +54,23 @@
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
 @retrofit2.http.* <methods>;
 }
+
+# Keep OkHttp3 classes and CertificatePinner
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-keepclassmembers class okhttp3.** {
+    *;
+}
+-keep class com.squareup.okhttp3.logging.** { *; }
+
+# Keep certificate-related classes in case they are being removed
+-keep class okhttp3.internal.tls.** { *; }
+
+# Keep necessary code that CertificatePinner may reference via reflection
+-keepnames class okhttp3.CertificatePinner { *; }
+
+# Avoid obfuscating okhttp3's internal methods (helps during debugging)
+-dontwarn okhttp3.**
 
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
@@ -65,15 +94,24 @@
 
 -dontwarn kotlinx.**
 
-# This is generated automatically by the Android Gradle plugin.
-#-dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.**
+# Keep ArchTaskExecutor methods
+-keep class androidx.arch.core.executor.ArchTaskExecutor { *; }
+
+# Keep Lifecycle-related classes
+-keep class androidx.lifecycle.** { *; }
+
+# Don't warn about AndroidX classes
+-dontwarn androidx.**
+
+
+#missing
+#-keep class com.example.aplikasi_dicoding_event_navigationdanapi.core.** { *; }
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.EventsRepository
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource$Error
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource$Loading
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource$Success
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.Resource
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.LocalDataSource
--dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.local.room.EventDao
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.RemoteDataSource
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.data.source.remote.network.ApiService
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.di.DatabaseModule
@@ -90,4 +128,3 @@
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.ui.EventAdapter
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.AppExecutors
 -dontwarn com.example.aplikasi_dicoding_event_navigationdanapi.core.utils.UtilsKt
-

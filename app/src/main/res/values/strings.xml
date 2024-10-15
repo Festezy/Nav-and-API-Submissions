@@ -16,4 +16,6 @@
     <string name="empty_item_upcoming">There is no upcoming event for now, Check finished event</string>
     <string name="empty_item_finished">There is no upcoming event for now, Check finished event</string>
     <string name="activity_detail_view">Detail:</string>
+    <string name="event_image">event Image</string>
+    <string name="add_favorite">add Favorite</string>
 </resources>
