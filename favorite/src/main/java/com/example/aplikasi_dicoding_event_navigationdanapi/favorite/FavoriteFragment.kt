@@ -50,7 +50,7 @@ class FavoriteFragment : Fragment() {
                 )
             )
             .build()
-            .inject(this)
+            .inject(this@FavoriteFragment)
 //        (requireActivity().application as MyApplication).appComponent.inject(this)
 //        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
